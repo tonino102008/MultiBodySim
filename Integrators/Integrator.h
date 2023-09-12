@@ -20,6 +20,24 @@ private:
 	std::vector<double> xPrev;
 
 public:
+
+	Integrator();
+
+	Integrator(const double timeStart, const double timeEnd,
+		const double dt, const double timeActual,
+		const std::vector<double>& xAct, const std::vector<double>& xPrev);
+
+	double getTimeStart() const;
+
+	double getTimeEnd() const;
+
+	double getDt() const;
+
+	double getTimeActual() const;
+
+	std::vector<double> getXAct() const;
+
+	std::vector<double> getXPrev() const;
 	
 };
 

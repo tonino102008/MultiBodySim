@@ -17,8 +17,6 @@ public:
 
 	Quaternion(const double s, const std::vector<double> v);
 
-	~Quaternion();
-
 	double getScalar() const;
 
 	std::vector<double> getVector() const;

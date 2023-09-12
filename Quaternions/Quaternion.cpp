@@ -1,14 +1,12 @@
 #include "Quaternion.h"
 
-Quaternion::Quaternion() {
-	this->scalar = 0;
-	this->vector = std::vector<double>{ 0, 0, 0 };
-};
+Quaternion::Quaternion() :
+	scalar(0), vector(std::vector<double>{0, 0, 0}) 
+{};
 
-Quaternion::Quaternion(const double s, const std::vector<double> v) {
-	this->scalar = s;
-	this->vector = v;
-};
+Quaternion::Quaternion(const double s, const std::vector<double> v) :
+	scalar(s), vector(v)
+{};
 
 double Quaternion::getScalar() const {
 	return this->scalar;
