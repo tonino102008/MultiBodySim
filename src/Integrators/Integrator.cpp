@@ -1,4 +1,4 @@
-#include "Integrator.h"
+#include "Integrators/Integrator.h"
 
 Integrator::Integrator() :
 	timeStart_(0), timeEnd_(0),

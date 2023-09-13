@@ -1,4 +1,4 @@
-#include "Quaternion.h"
+#include "Quaternions/Quaternion.h"
 
 Quaternion::Quaternion() :
 	scalar_(0), vector_(std::vector<double>{0, 0, 0}) 
