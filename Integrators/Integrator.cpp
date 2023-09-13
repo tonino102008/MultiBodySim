@@ -1,39 +1,39 @@
 #include "Integrator.h"
 
 Integrator::Integrator() :
-	timeStart(0), timeEnd(0),
-	dt(0), timeActual(0),
-	xAct(std::vector<double>{ 0, 0 }), xPrev(std::vector<double>{ 0, 0 })
+	timeStart_(0), timeEnd_(0),
+	dt_(0), timeActual_(0),
+	xActual_(std::vector<double>{ 0, 0 }), xPrevious_(std::vector<double>{ 0, 0 })
 {};
 
 Integrator::Integrator(const double timeStart, const double timeEnd,
 	const double dt, const double timeActual,
-	const std::vector<double>& xAct, const std::vector<double>& xPrev) :
-	timeStart(timeStart), timeEnd(timeEnd),
-	dt(dt), timeActual(timeActual),
-	xAct(xAct),	xPrev(xPrev) 
+	const std::vector<double>& xActual, const std::vector<double>& xPrevious) :
+	timeStart_(timeStart), timeEnd_(timeEnd),
+	dt_(dt), timeActual_(timeActual),
+	xActual_(xActual), xPrevious_(xPrevious)
 {};
 
 double Integrator::getTimeStart() const {
-	return this->timeStart;
+	return this->timeStart_;
 };
 
 double Integrator::getTimeEnd() const {
-	return this->timeEnd;
+	return this->timeEnd_;
 };
 
 double Integrator::getDt() const {
-	return this->dt;
+	return this->dt_;
 };
 
 double Integrator::getTimeActual() const {
-	return this->timeActual;
+	return this->timeActual_;
 };
 
 std::vector<double> Integrator::getXAct() const {
-	return this->xAct;
+	return this->xActual_;
 };
 
 std::vector<double> Integrator::getXPrev() const {
-	return this->xPrev;
+	return this->xPrevious_;
 };

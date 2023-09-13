@@ -1,15 +1,9 @@
-#ifndef Quaternion_h
-#define Quaternion_h
+#ifndef MULTIBODYSIM_QUATERNIONS_QUATERNION_H_
+#define MULTIBODYSIM_QUATERNIONS_QUATERNION_H_
 
 #include <vector>
 
 class Quaternion {
-
-private:
-
-	double scalar;
-
-	std::vector<double> vector;
 
 public:
 
@@ -29,6 +23,12 @@ public:
 
 	double norm() const;
 
+private:
+
+	double scalar_;
+
+	std::vector<double> vector_;
+
 };
 
-#endif
+#endif // MULTIBODYSIM_QUATERNIONS_QUATERNION_H_
