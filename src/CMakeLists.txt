@@ -4,7 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Set project name
-project ("MultiBodySim_exe")
+project ("MultiBodySim")
 
 add_subdirectory(Integrators)
 add_subdirectory(Quaternions)

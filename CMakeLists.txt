@@ -21,7 +21,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(include)
 
 add_subdirectory(src)
+add_subdirectory(lib)
 
 if(BUILD_TESTS)
+	enable_testing()
 	add_subdirectory(tests)
 endif(BUILD_TESTS)
