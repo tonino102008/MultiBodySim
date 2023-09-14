@@ -37,6 +37,10 @@ Quaternion Quaternion::operator*(const Quaternion& q) const {
 	return out;
 };
 
+std::ostream& operator<<(std::ostream& out, const Quaternion& q) {
+	return out << q.scalar_ << " " << q.vector_[0] << " " << q.vector_[1] << " " << q.vector_[2];
+};
+
 Quaternion Quaternion::conj() const {
 	Quaternion out;
 	out.scalar_ = this->scalar_;

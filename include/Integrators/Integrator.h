@@ -2,6 +2,7 @@
 #define MULTIBODYSIM_INCLUDE_INTEGRATORS_INTEGRATOR_H_
 
 #include <vector>
+#include <ostream>
 
 class Integrator {
 
@@ -24,6 +25,8 @@ public:
 	std::vector<double> getXAct() const;
 
 	std::vector<double> getXPrev() const;
+
+	friend std::ostream& operator<<(std::ostream& out, const Integrator& I);
 
 private:
 

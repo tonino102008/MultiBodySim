@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cmath>
+#include <ostream>
 
 class Quaternion {
 
@@ -19,6 +20,8 @@ public:
 	Quaternion operator+(const Quaternion& q) const;
 
 	Quaternion operator*(const Quaternion& q) const;
+
+	friend std::ostream& operator<<(std::ostream& out, const Quaternion& q);
 
 	Quaternion conj() const;
 

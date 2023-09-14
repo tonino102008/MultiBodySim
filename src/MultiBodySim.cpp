@@ -1,7 +1,5 @@
 ﻿#include "MultiBodySim.h"
 
-#include<vector> 
-
 int main()
 {
 
@@ -11,10 +9,10 @@ int main()
 	int k = 1;
 
 	Quaternion q(1, std::vector<double> {1, 1, 1});
-	std::cout << "Quaternion q: " << q.getScalar() << " " << q.getVector()[0] << std::endl;
+	std::cout << "Quaternion q: " << q << std::endl;
 
 	Integrator I;
-	std::cout << "Integrator I: " << I.getDt() << " " << I.getTimeEnd() << std::endl;
+	std::cout << "Integrator I: \n" << I << std::endl;
 
 	std::cout << "End Program" << std::endl;
 

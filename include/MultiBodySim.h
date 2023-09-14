@@ -4,6 +4,7 @@
 #include "Integrators/Integrator.h"
 #include "Quaternions/Quaternion.h"
 
+#include<vector>
 #include <iostream>
 
 #endif // MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_

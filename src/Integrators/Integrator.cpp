@@ -37,3 +37,15 @@ std::vector<double> Integrator::getXAct() const {
 std::vector<double> Integrator::getXPrev() const {
 	return this->xPrevious_;
 };
+
+std::ostream& operator<<(std::ostream& out, const Integrator& I) {
+	out << "Time vector: [" << I.timeStart_ << ":" << I.dt_ << ":" << I.timeEnd_ << "]s\n" 
+		<< "Actual Time Step: " << I.timeActual_ << "s" << std::endl;
+	out << "Actual Vector: ";
+	for (auto element : I.xActual_)
+		out << element << " ";
+	out << "\nPrevious Vector: ";
+	for (auto element : I.xPrevious_)
+		out << element << " ";
+	return out;
+};
