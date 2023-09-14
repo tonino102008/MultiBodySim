@@ -14,4 +14,4 @@ set(SOURCES MultiBodySim.cpp)
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_executable (MultiBodySim ${SOURCES})
 
-target_link_libraries(MultiBodySim Quaternions Integrators)
+target_link_libraries(MultiBodySim Quaternions Integrators Eigen3::Eigen)

@@ -6,5 +6,6 @@
 
 #include<vector>
 #include <iostream>
+#include "Eigen/Dense"
 
 #endif // MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_
