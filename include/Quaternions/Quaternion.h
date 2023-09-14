@@ -2,6 +2,7 @@
 #define MULTIBODYSIM_INCLUDE_QUATERNIONS_QUATERNION_H_
 
 #include <vector>
+#include <cmath>
 
 class Quaternion {
 
