@@ -27,6 +27,8 @@ public:
 
 	VectorN operator*(const double d) const;
 
+	friend std::ostream& operator<<(std::ostream& out, const VectorN& v);
+
 	double dot(const VectorN& v) const;
 
 	VectorN cross(const VectorN& v) const;
@@ -35,7 +37,7 @@ public:
 
 private:
 
-	const int ksize_;
+	const int kSize_;
 
 	std::vector<double> vector_;
 

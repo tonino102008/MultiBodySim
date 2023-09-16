@@ -16,6 +16,12 @@ int main()
 	Integrator I;
 	std::cout << "Integrator I: \n" << I << std::endl;
 
+	MatrixN mat(3, 3);
+	mat[0][1] = 10.0;
+	mat[2][2] = 10.0;
+
+	std::cout << "Matrix mat: \n" << mat << std::endl;
+
 	std::cout << "End Program" << std::endl;
 
 	return 0;

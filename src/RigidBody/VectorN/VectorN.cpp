@@ -1,11 +1,11 @@
 #include "RigidBody/VectorN/VectorN.h"
 
 VectorN::VectorN(const int size) :
-	ksize_(size), vector_(ksize_)
+	kSize_(size), vector_(kSize_)
 {};
 
 int VectorN::getSize() const {
-	return this->ksize_;
+	return this->kSize_;
 }
 
 double& VectorN::operator[](const int i) {
@@ -67,6 +67,12 @@ VectorN VectorN::operator*(const double d) const {
 	VectorN out(this->getSize());
 	for (int i = 0; i < this->getSize(); i++)
 		out[i] = this->vector_[i] * d;
+	return out;
+};
+
+std::ostream& operator<<(std::ostream& out, const VectorN& v) {
+	for (int i = 0; i < v.getSize(); i++)
+		out << v[i] << " ";
 	return out;
 };
 

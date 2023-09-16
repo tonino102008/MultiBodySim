@@ -3,6 +3,7 @@
 
 #include "RigidBody/Integrators/Integrator.h"
 #include "RigidBody/Quaternions/Quaternion.h"
+#include "RigidBody/MatrixN/MatrixN.h"
 
 #include<vector>
 #include <iostream>

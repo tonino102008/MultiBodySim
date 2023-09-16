@@ -7,8 +7,9 @@ set(RIGIDBODY_SOURCES RigidBody.cpp)
 add_subdirectory(Integrators)
 add_subdirectory(Quaternions)
 add_subdirectory(VectorN)
+add_subdirectory(MatrixN)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(RigidBody ${RIGIDBODY_SOURCES})
 
-target_link_libraries(RigidBody Integrators Quaternions VectorN)
+target_link_libraries(RigidBody Integrators Quaternions VectorN MatrixN)

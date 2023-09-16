@@ -1,10 +1,10 @@
 #ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
 
-#include <vector>
+#include "RigidBody/VectorN/VectorN.h"
+
 #include <cmath>
 #include <ostream>
-#include "RigidBody/VectorN/VectorN.h"
 
 class Quaternion {
 
