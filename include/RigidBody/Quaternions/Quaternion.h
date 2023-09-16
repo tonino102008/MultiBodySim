@@ -1,9 +1,10 @@
-#ifndef MULTIBODYSIM_INCLUDE_QUATERNIONS_QUATERNION_H_
-#define MULTIBODYSIM_INCLUDE_QUATERNIONS_QUATERNION_H_
+#ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
+#define MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
 
 #include <vector>
 #include <cmath>
 #include <ostream>
+#include "RigidBody/VectorN/VectorN.h"
 
 class Quaternion {
 
@@ -11,11 +12,11 @@ public:
 
 	Quaternion();
 
-	Quaternion(const double s, const std::vector<double> v);
+	Quaternion(const double s, const VectorN v);
 
 	double getScalar() const;
 
-	std::vector<double> getVector() const;
+	VectorN getVector() const;
 
 	Quaternion operator+(const Quaternion& q) const;
 
@@ -31,8 +32,8 @@ private:
 
 	double scalar_;
 
-	std::vector<double> vector_;
+	VectorN vector_;
 
 };
 
-#endif // MULTIBODYSIM_INCLUDE_QUATERNIONS_QUATERNION_H_
+#endif // MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_

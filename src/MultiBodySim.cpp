@@ -8,7 +8,9 @@ int main()
 	int m = 1;
 	int k = 1;
 
-	Quaternion q(1, std::vector<double> {1, 1, 1});
+	VectorN v(3);
+	v[1] = 1.0;
+	Quaternion q(1.0, v);
 	std::cout << "Quaternion q: " << q << std::endl;
 
 	Integrator I;

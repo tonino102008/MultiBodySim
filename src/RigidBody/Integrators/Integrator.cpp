@@ -1,14 +1,14 @@
-#include "Integrators/Integrator.h"
+#include "RigidBody/Integrators/Integrator.h"
 
 Integrator::Integrator() :
 	timeStart_(0), timeEnd_(0),
 	dt_(0), timeActual_(0),
-	xActual_(std::vector<double>{ 0, 0 }), xPrevious_(std::vector<double>{ 0, 0 })
+	xActual_(VectorN(2)), xPrevious_(VectorN(2))
 {};
 
 Integrator::Integrator(const double timeStart, const double timeEnd,
 	const double dt, const double timeActual,
-	const std::vector<double>& xActual, const std::vector<double>& xPrevious) :
+	const VectorN& xActual, const VectorN& xPrevious) :
 	timeStart_(timeStart), timeEnd_(timeEnd),
 	dt_(dt), timeActual_(timeActual),
 	xActual_(xActual), xPrevious_(xPrevious)
@@ -30,11 +30,11 @@ double Integrator::getTimeActual() const {
 	return this->timeActual_;
 };
 
-std::vector<double> Integrator::getXAct() const {
+VectorN Integrator::getXAct() const {
 	return this->xActual_;
 };
 
-std::vector<double> Integrator::getXPrev() const {
+VectorN Integrator::getXPrev() const {
 	return this->xPrevious_;
 };
 
@@ -42,10 +42,10 @@ std::ostream& operator<<(std::ostream& out, const Integrator& I) {
 	out << "Time vector: [" << I.timeStart_ << ":" << I.dt_ << ":" << I.timeEnd_ << "]s\n" 
 		<< "Actual Time Step: " << I.timeActual_ << "s" << std::endl;
 	out << "Actual Vector: ";
-	for (auto element : I.xActual_)
-		out << element << " ";
+	for (int i = 0; i < I.xActual_.getSize(); i++)
+		out << I.xActual_[i] << " ";
 	out << "\nPrevious Vector: ";
-	for (auto element : I.xPrevious_)
-		out << element << " ";
+	for (int i = 0; i < I.xPrevious_.getSize(); i++)
+		out << I.xPrevious_[i] << " ";
 	return out;
 };
