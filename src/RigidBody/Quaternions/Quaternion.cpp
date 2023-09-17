@@ -8,6 +8,13 @@ Quaternion::Quaternion(const double s, const MatrixN& m) :
 	scalar_(s), vector_(m)
 {};
 
+MatrixN Quaternion::getQuaternion() const {
+	MatrixN out(4, 1);
+	out.fill(0, 0, MatrixN(1, 1, this->getScalar()));
+	out.fill(1, 0, this->getVector());
+	return out;
+};
+
 double Quaternion::getScalar() const {
 	return this->scalar_;
 };
@@ -16,18 +23,26 @@ MatrixN Quaternion::getVector() const {
 	return this->vector_;
 };
 
+double Quaternion::qx() const {
+	return this->vector_[0][0];
+};
+
+double Quaternion::qy() const {
+	return this->vector_[1][0];
+};
+
+double Quaternion::qz() const {
+	return this->vector_[2][0];
+};
+
 Quaternion Quaternion::operator+(const Quaternion& q) const {
-	Quaternion out;
-	out.scalar_ = this->scalar_ + q.scalar_;
-	out.vector_ = this->vector_ + q.vector_;
-	return out;
+	return Quaternion(this->scalar_ + q.scalar_,
+		this->vector_ + q.vector_);
 };
 
 Quaternion Quaternion::operator*(const Quaternion& q) const {
-	Quaternion out;
-	out.scalar_ = this->scalar_ * q.scalar_ + this->vector_.dot(q.vector_);
-	out.vector_ = this->vector_.cross(q.vector_) + q.vector_ * this->scalar_ + this->vector_ * q.scalar_;
-	return out;
+	return Quaternion(this->scalar_ * q.scalar_ + this->vector_.dot(q.vector_),
+		this->vector_.cross(q.vector_) + q.vector_ * this->scalar_ + this->vector_ * q.scalar_);
 };
 
 std::ostream& operator<<(std::ostream& out, const Quaternion& q) {
@@ -35,10 +50,7 @@ std::ostream& operator<<(std::ostream& out, const Quaternion& q) {
 };
 
 Quaternion Quaternion::conj() const {
-	Quaternion out;
-	out.scalar_ = this->scalar_;
-	out.vector_ = this->vector_ * (- 1.0);
-	return out;
+	return Quaternion(this->scalar_, this->vector_ * (-1.0));
 };
 
 double Quaternion::norm() const {

@@ -2,7 +2,7 @@
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_RIGIDBODY_H_
 
 #include "Quaternions/Quaternion.h"
-#include "MatrixN/MatrixN.h"
+#include "RigidBodyConst.h"
 
 class RigidBody {
 
@@ -12,9 +12,25 @@ public:
 		const MatrixN& xG0, const Quaternion& q0,
 		const MatrixN& xGp0, const Quaternion& qp0);
 
+	void updateDof();
+
+	void updateMass();
+
+	void updateF();
+
+	MatrixN getG() const;
+
+	MatrixN getGp() const;
+
 	MatrixN getDof() const;
 
 	MatrixN getMass() const;
+
+	MatrixN getF() const;
+
+	MatrixN getWGlobal() const;
+
+	MatrixN getWLocal() const;
 
 private:
 
@@ -26,9 +42,9 @@ private:
 
 	Quaternion qp_; // State rotation quaternion [qps,qpx,qpy,qpz]
 
-	MatrixN dof_; // Full State [xpG,ypG,zpG,qps,qpx,qpy,qpz,xG,yG,zG,qs,qx,qy,qz]
+	MatrixN dof_; // Full State [xpG,ypG,zpG,qps,qpx,qpy,qpz,xG,yG,zG,qs,qx,qy,qz,lambda]
 
-	MatrixN dofp_; // Full State [xppG,yppG,zppG,qpps,qppx,qppy,qppz,xpG,ypG,zpG,qps,qpx,qpy,qpz]
+	MatrixN dofp_; // Full State [xppG,yppG,zppG,qpps,qppx,qppy,qppz,xpG,ypG,zpG,qps,qpx,qpy,qpz,lambdap]
 
 	MatrixN m_;
 

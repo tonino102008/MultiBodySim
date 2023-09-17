@@ -14,6 +14,8 @@ public:
 
 	MatrixN(const int row_size, const int col_size);
 
+	MatrixN(const int row_size, const int col_size, const std::vector<std::vector<double>> m);
+
 	MatrixN(const int row_size, const int col_size, const double d);
 
 	MatrixN(const int size, const double d);
@@ -44,7 +46,7 @@ public:
 
 	double norm() const;
 
-	MatrixN T(const MatrixN& m) const;
+	MatrixN T() const;
 
 	void fill(const int fromRow, const int fromCol, MatrixN& m);
 

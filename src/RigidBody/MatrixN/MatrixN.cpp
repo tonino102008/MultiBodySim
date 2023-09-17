@@ -6,6 +6,12 @@ MatrixN::MatrixN(const int row_size, const int col_size) :
 	matrix_(kRowSize_, std::vector<double>(kColSize_))
 {};
 
+MatrixN::MatrixN(const int row_size, const int col_size, const std::vector<std::vector<double>> m) :
+	kRowSize_(row_size),
+	kColSize_(col_size),
+	matrix_(m)
+{};
+
 MatrixN::MatrixN(const int row_size, const int col_size, const double d) :
 	kRowSize_(row_size),
 	kColSize_(col_size),
@@ -127,11 +133,11 @@ double MatrixN::norm() const {
 	return out;
 };
 
-MatrixN MatrixN::T(const MatrixN& m) const {
-	MatrixN out(this->getSize()[0], this->getSize()[1]);
-	for (int i = 0; i < this->getSize()[0]; i++)
-		for (int j = 0; j < this->getSize()[1]; j++)
-			out[j][i] = this->matrix_[i][j];
+MatrixN MatrixN::T() const {
+	MatrixN out(this->getSize()[1], this->getSize()[0]);
+	for (int i = 0; i < this->getSize()[1]; i++)
+		for (int j = 0; j < this->getSize()[0]; j++)
+			out[i][j] = this->matrix_[j][i];
 	return out;
 };
 

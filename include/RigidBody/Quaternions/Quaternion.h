@@ -14,9 +14,17 @@ public:
 
 	Quaternion(const double s, const MatrixN& m);
 
+	MatrixN getQuaternion() const;
+
 	double getScalar() const;
 
 	MatrixN getVector() const;
+
+	double qx() const;
+
+	double qy() const;
+
+	double qz() const;
 
 	Quaternion operator+(const Quaternion& q) const;
 
