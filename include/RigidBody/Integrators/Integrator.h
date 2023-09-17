@@ -1,7 +1,8 @@
 #ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_INTEGRATOR_H_
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_INTEGRATOR_H_
 
-#include "RigidBody/VectorN/VectorN.h"
+#include "RigidBody/MatrixN/MatrixN.h"
+#include "RigidBody/RigidBody.h"
 
 #include <vector>
 #include <ostream>
@@ -14,7 +15,7 @@ public:
 
 	Integrator(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual,
-		const VectorN& xActual, const VectorN& xPrevious);
+		const RigidBody& Body);
 
 	double getTimeStart() const;
 
@@ -24,9 +25,9 @@ public:
 
 	double getTimeActual() const;
 
-	VectorN getXAct() const;
+	MatrixN getXAct() const;
 
-	VectorN getXPrev() const;
+	MatrixN getXPrev() const;
 
 	friend std::ostream& operator<<(std::ostream& out, const Integrator& I);
 
@@ -40,9 +41,9 @@ private:
 
 	double timeActual_;
 
-	VectorN xActual_;
+	MatrixN xActual_;
 
-	VectorN xPrevious_;
+	MatrixN xPrevious_;
 	
 };
 

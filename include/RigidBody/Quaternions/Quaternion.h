@@ -1,7 +1,7 @@
 #ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
 
-#include "RigidBody/VectorN/VectorN.h"
+#include "RigidBody/MatrixN/MatrixN.h"
 
 #include <cmath>
 #include <ostream>
@@ -12,11 +12,11 @@ public:
 
 	Quaternion();
 
-	Quaternion(const double s, const VectorN v);
+	Quaternion(const double s, const MatrixN& m);
 
 	double getScalar() const;
 
-	VectorN getVector() const;
+	MatrixN getVector() const;
 
 	Quaternion operator+(const Quaternion& q) const;
 
@@ -32,7 +32,7 @@ private:
 
 	double scalar_;
 
-	VectorN vector_;
+	MatrixN vector_;
 
 };
 

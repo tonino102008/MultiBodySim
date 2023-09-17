@@ -1,28 +1,42 @@
 #ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_RIGIDBODY_H_
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_RIGIDBODY_H_
 
-#include "Integrators/Integrator.h"
 #include "Quaternions/Quaternion.h"
+#include "MatrixN/MatrixN.h"
 
 class RigidBody {
 
 public:
 
+	RigidBody(const MatrixN& m, const MatrixN& J,
+		const MatrixN& xG0, const Quaternion& q0,
+		const MatrixN& xGp0, const Quaternion& qp0);
+
+	MatrixN getDof() const;
+
+	MatrixN getMass() const;
+
 private:
 
-	std::vector<double> x_; // State translation vector
+	MatrixN xG_; // State translation vector [xG,yG,zG]
 
-	Quaternion q_; // State rotation quaternion
+	MatrixN xGp_; // State translation vector [xpG,ypG,zpG]
 
-	std::vector<std::vector<double>> m_;
+	Quaternion q_; // State rotation quaternion [qs,qx,qy,qz]
 
-	std::vector<std::vector<double>> J_;
+	Quaternion qp_; // State rotation quaternion [qps,qpx,qpy,qpz]
 
-	std::vector<std::vector<double>> M_;
+	MatrixN dof_; // Full State [xpG,ypG,zpG,qps,qpx,qpy,qpz,xG,yG,zG,qs,qx,qy,qz]
 
-	std::vector<std::vector<double>> f_;
+	MatrixN dofp_; // Full State [xppG,yppG,zppG,qpps,qppx,qppy,qppz,xpG,ypG,zpG,qps,qpx,qpy,qpz]
 
-	Integrator I_;
+	MatrixN m_;
+
+	MatrixN J_;
+
+	MatrixN M_;
+
+	MatrixN f_;
 
 };
 

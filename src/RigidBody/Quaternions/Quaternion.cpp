@@ -1,18 +1,18 @@
 #include "RigidBody/Quaternions/Quaternion.h"
 
 Quaternion::Quaternion() :
-	scalar_(0), vector_(VectorN(3))
+	scalar_(0), vector_(MatrixN(3,kSingleColumn))
 {};
 
-Quaternion::Quaternion(const double s, const VectorN v) :
-	scalar_(s), vector_(v)
+Quaternion::Quaternion(const double s, const MatrixN& m) :
+	scalar_(s), vector_(m)
 {};
 
 double Quaternion::getScalar() const {
 	return this->scalar_;
 };
 
-VectorN Quaternion::getVector() const {
+MatrixN Quaternion::getVector() const {
 	return this->vector_;
 };
 
@@ -31,7 +31,7 @@ Quaternion Quaternion::operator*(const Quaternion& q) const {
 };
 
 std::ostream& operator<<(std::ostream& out, const Quaternion& q) {
-	return out << q.scalar_ << " " << q.vector_[0] << " " << q.vector_[1] << " " << q.vector_[2];
+	return out << q.scalar_ << "\n" << q.vector_;
 };
 
 Quaternion Quaternion::conj() const {
