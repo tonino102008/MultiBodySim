@@ -1,6 +1,7 @@
 #include "RigidBody/Integrators/EulerForward/EulerForward.h"
 
 #include <iostream>
+#include <fstream>
 
 EulerForward::EulerForward(const double timeStart, const double timeEnd,
 	const double dt, const double timeActual, RigidBody& body) :
@@ -30,3 +31,10 @@ void EulerForward::print() const {
 	std::cout << "Actual Time Step: " << this->timeActual_ << "s" << std::endl;
 	std::cout << "Dof: \n" << this->body_.getDof() << std::endl;
 }
+
+void EulerForward::printToFile() const {
+	std::ofstream myfile;
+	myfile.open("output.txt");
+	myfile << this->getdofTimeHistory();
+	myfile.close();
+};

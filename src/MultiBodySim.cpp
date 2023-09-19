@@ -7,7 +7,6 @@ int main()
 
 	double mV = 1.0;
 	double JV = 0.5;
-	double kV = 1.0;
 
 	MatrixN m(3, mV);
 	MatrixN J(3, JV);
@@ -22,11 +21,13 @@ int main()
 
 	RigidBody Body(m, J, xG, q, xGp, qp);
 
-	EulerForward I(0.0, 0.005, 0.001, 0.0, Body);
+	EulerForward I(0.0, 0.5, 0.001, 0.0, Body);
 
 	I.solve();
 
-	std::cout << "DOFs Time History: \n" << I.getdofTimeHistory() << std::endl;
+	//std::cout << "DOFs Time History: \n" << I.getdofTimeHistory() << std::endl;
+
+	I.printToFile();
 
 	//std::cout << "DOFs: \n" << Body.getDof() << std::endl;
 	//Body.updateXG(MatrixN(3, 1, 1.0));

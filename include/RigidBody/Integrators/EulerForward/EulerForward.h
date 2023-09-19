@@ -15,6 +15,8 @@ public:
 
 	void print() const;
 
+	void printToFile() const;
+
 };
 
 #endif //MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_EULERFORWARD_EULERFORWARD_H_
