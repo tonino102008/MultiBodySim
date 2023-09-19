@@ -50,6 +50,8 @@ public:
 
 	void fill(const int fromRow, const int fromCol, MatrixN& m);
 
+	MatrixN slice(const int fromRow, const int toRow, const int fromCol, const int toCol);
+
 private:
 
 	const int kRowSize_;

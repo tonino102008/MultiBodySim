@@ -8,4 +8,7 @@ const MatrixN kDGDqx(3, 4, { {-1.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 1.0}, {0.0, 
 const MatrixN kDGDqy(3, 4, { {0.0, 0.0, 0.0, -1.0}, {-1.0, 0.0, 0.0, 0.0}, {0.0, 1.0, 0.0, 0.0} });
 const MatrixN kDGDqz(3, 4, { {0.0, 0.0, 1.0, 0.0}, {0.0, -1.0, 0.0, 0.0}, {-1.0, 0.0, 0.0, 0.0} });
 
+const double kAlpha = 1.0;
+const double kBeta = 1.0;
+
 #endif // MULTIBODYSIM_INCLUDE_RIGIDBODY_RIGIDBODYCONST_H_

@@ -14,8 +14,7 @@ public:
 	Integrator();
 
 	Integrator(const double timeStart, const double timeEnd,
-		const double dt, const double timeActual,
-		const RigidBody& Body);
+		const double dt, const double timeActual, RigidBody& body);
 
 	double getTimeStart() const;
 
@@ -25,25 +24,29 @@ public:
 
 	double getTimeActual() const;
 
-	MatrixN getXAct() const;
+	int getNSteps() const;
 
-	MatrixN getXPrev() const;
+	MatrixN getdofTimeHistory() const;
 
 	friend std::ostream& operator<<(std::ostream& out, const Integrator& I);
 
-private:
+	virtual void solve() = 0;
 
-	double timeStart_;
+protected:
 
-	double timeEnd_;
+	const double timeStart_;
 
-	double dt_;
+	const double timeEnd_;
+
+	const double dt_;
 
 	double timeActual_;
 
-	MatrixN xActual_;
+	const int nSteps_;
 
-	MatrixN xPrevious_;
+	MatrixN dofTimeHistory_;
+
+	RigidBody body_;
 	
 };
 

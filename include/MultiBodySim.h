@@ -1,7 +1,7 @@
 ﻿#ifndef MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_
 
-#include "RigidBody/Integrators/Integrator.h"
+#include "RigidBody/Integrators/EulerForward/EulerForward.h"
 #include "RigidBody/Quaternions/Quaternion.h"
 #include "RigidBody/MatrixN/MatrixN.h"
 

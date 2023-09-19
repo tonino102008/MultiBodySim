@@ -12,6 +12,14 @@ public:
 		const MatrixN& xG0, const Quaternion& q0,
 		const MatrixN& xGp0, const Quaternion& qp0);
 
+	void updateXG(const MatrixN xG);
+
+	void updateXGp(const MatrixN xGp);
+
+	void updateQ(const Quaternion q);
+
+	void updateQp(const Quaternion qp);
+
 	void updateDof();
 
 	void updateMass();
