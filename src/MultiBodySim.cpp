@@ -1,5 +1,7 @@
 ﻿#include "MultiBodySim.h"
 
+#include <chrono>
+
 int main()
 {
 
@@ -15,15 +17,20 @@ int main()
 	MatrixN xGp(3, 1, 0.0);
 	//xGp[0][0] = -1.0;
 	//Quaternion q(0.3, MatrixN(3, 1, { {0.5}, {0.7}, {sqrt(1 - 0.3 * 0.3 - 0.5 * 0.5 - 0.7 * 0.7)} }));
-	Quaternion qp(0.125, MatrixN(3, 1, { {0.23}, {0.17}, {sqrt(1 - 0.125 * 0.125 - 0.23 * 0.23 - 0.17 * 0.17)} }));
+	Quaternion qp(0.0, MatrixN(3, 1, { {0.23}, {0.17}, {sqrt(1 - 0.0 * 0.0 - 0.23 * 0.23 - 0.17 * 0.17)} }));
 	Quaternion q(1.0, MatrixN(3, 1, 0.0));
 	//Quaternion qp(0.0, MatrixN(3, 1, 0.0));
 
 	RigidBody Body(m, J, xG, q, xGp, qp);
 
-	EulerForward I(0.0, 0.5, 0.001, 0.0, Body);
+	EulerForward I(0.0, 1.0, 0.001, 0.0, Body);
 
+	auto start = std::chrono::high_resolution_clock::now();
 	I.solve();
+	auto stop = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
+	std::cout << "Time taken by function: " << duration.count() / 1000.0 << " seconds" << std::endl;
 
 	//std::cout << "DOFs Time History: \n" << I.getdofTimeHistory() << std::endl;
 

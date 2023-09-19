@@ -5,7 +5,7 @@ Integrator::Integrator(const double timeStart, const double timeEnd,
 	timeStart_(timeStart), timeEnd_(timeEnd),
 	dt_(dt), timeActual_(timeActual),
 	nSteps_((timeEnd - timeStart) / dt), body_(body),
-	dofTimeHistory_(MatrixN(body.getDof().getSize()[0], (timeEnd - timeStart + dt)/dt, 0.0))
+	dofTimeHistory_(MatrixN(body.getDof().getSize()[0], (timeEnd - timeStart)/dt + 1, 0.0))
 {};
 
 double Integrator::getTimeStart() const {

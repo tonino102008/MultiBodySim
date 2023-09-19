@@ -9,7 +9,7 @@ EulerForward::EulerForward(const double timeStart, const double timeEnd,
 {};
 
 void EulerForward::solve() {
-	this->print();
+	//this->print();
 	this->dofTimeHistory_.fill(0, 0, this->body_.getDof());
 	for (int i = 0; i < this->nSteps_; i++) {
 		this->timeActual_ += this->dt_;
@@ -23,7 +23,7 @@ void EulerForward::solve() {
 		this->body_.updateMass();
 		this->body_.updateF();
 		this->dofTimeHistory_.fill(0, i + 1, this->body_.getDof());
-		this->print();
+		//this->print();
 	}
 };
 

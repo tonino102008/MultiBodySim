@@ -41,7 +41,7 @@ Quaternion Quaternion::operator+(const Quaternion& q) const {
 };
 
 Quaternion Quaternion::operator*(const Quaternion& q) const {
-	return Quaternion(this->scalar_ * q.scalar_ + this->vector_.dot(q.vector_),
+	return Quaternion(this->scalar_ * q.scalar_ - this->vector_.dot(q.vector_),
 		this->vector_.cross(q.vector_) + q.vector_ * this->scalar_ + this->vector_ * q.scalar_);
 };
 

@@ -30,6 +30,10 @@ public:
 
 	MatrixN getGp() const;
 
+	MatrixN getE() const;
+
+	MatrixN getEp() const;
+
 	MatrixN getDof() const;
 
 	MatrixN getMass() const;
