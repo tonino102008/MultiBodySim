@@ -14,7 +14,7 @@ public:
 	Integrator();
 
 	Integrator(const double timeStart, const double timeEnd,
-		const double dt, const double timeActual, RigidBody& body);
+		const double dt, const double timeActual, std::vector<std::reference_wrapper<RigidBody>> body);
 
 	double getTimeStart() const;
 
@@ -46,7 +46,7 @@ protected:
 
 	MatrixN dofTimeHistory_;
 
-	RigidBody body_;
+	std::vector<std::reference_wrapper<RigidBody>> body_;
 	
 };
 

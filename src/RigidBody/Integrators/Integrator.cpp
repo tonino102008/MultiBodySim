@@ -1,11 +1,11 @@
 #include "RigidBody/Integrators/Integrator.h"
 
 Integrator::Integrator(const double timeStart, const double timeEnd,
-	const double dt, const double timeActual, RigidBody& body) :
+	const double dt, const double timeActual, std::vector<std::reference_wrapper<RigidBody>> body) :
 	timeStart_(timeStart), timeEnd_(timeEnd),
 	dt_(dt), timeActual_(timeActual),
 	nSteps_((timeEnd - timeStart) / dt), body_(body),
-	dofTimeHistory_(MatrixN(body.getDof().getSize()[0], (timeEnd - timeStart)/dt + 1, 0.0))
+	dofTimeHistory_(MatrixN(body[0].get().getDof().getSize()[0], (timeEnd - timeStart) / dt + 1, 0.0)) // TODO: change initializer for vector of rigid bodies
 {};
 
 double Integrator::getTimeStart() const {

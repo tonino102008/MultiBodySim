@@ -23,7 +23,7 @@ int main()
 
 	RigidBody Body(m, J, xG, q, xGp, qp);
 
-	EulerForward I(0.0, 1.0, 0.001, 0.0, Body);
+	EulerForward I(0.0, 1.0, 0.001, 0.0, std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body)});
 
 	auto start = std::chrono::high_resolution_clock::now();
 	I.solve();
@@ -31,8 +31,6 @@ int main()
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
 	std::cout << "Time taken by function: " << duration.count() / 1000.0 << " seconds" << std::endl;
-
-	//std::cout << "DOFs Time History: \n" << I.getdofTimeHistory() << std::endl;
 
 	I.printToFile();
 
