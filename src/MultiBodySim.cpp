@@ -21,9 +21,10 @@ int main()
 	Quaternion q(1.0, MatrixN(3, 1, 0.0));
 	//Quaternion qp(0.0, MatrixN(3, 1, 0.0));
 
-	RigidBody Body(m, J, xG, q, xGp, qp);
+	RigidBody Body0(m, J, xG, q, xGp, qp);
+	RigidBody Body1(m, J, xG, q, xGp, qp);
 
-	EulerForward I(0.0, 1.0, 0.001, 0.0, std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body)});
+	EulerForward I(0.0, 1.0, 0.001, 0.0, std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body0), std::ref(Body1)});
 
 	auto start = std::chrono::high_resolution_clock::now();
 	I.solve();
@@ -33,8 +34,10 @@ int main()
 	std::cout << "Time taken by function: " << duration.count() / 1000.0 << " seconds" << std::endl;
 
 	I.printToFile();
+	//I.print();
 
-	//std::cout << "DOFs: \n" << Body.getDof() << std::endl;
+	//std::cout << "DOFs: \n" << Body0.getDof() << std::endl;
+	//std::cout << "DOFs: \n" << Body1.getDof() << std::endl;
 	//Body.updateXG(MatrixN(3, 1, 1.0));
 	//Body.updateDof();
 	//std::cout << "DOFs: \n" << Body.getDof() << std::endl;

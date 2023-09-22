@@ -5,7 +5,9 @@ Integrator::Integrator(const double timeStart, const double timeEnd,
 	timeStart_(timeStart), timeEnd_(timeEnd),
 	dt_(dt), timeActual_(timeActual),
 	nSteps_((timeEnd - timeStart) / dt), body_(body),
-	dofTimeHistory_(MatrixN(body[0].get().getDof().getSize()[0], (timeEnd - timeStart) / dt + 1, 0.0)) // TODO: change initializer for vector of rigid bodies
+	dofTimeHistory_(MatrixN(body[0].get().getDof().getSize()[0] * body.size(), (timeEnd - timeStart) / dt + 1, 0.0)), // TODO: change initializer for vector of rigid bodies
+	M_(MatrixN(body[0].get().getDof().getSize()[0] * body.size(), body[0].get().getDof().getSize()[0] * body.size(), 0.0)),
+	f_(MatrixN(body[0].get().getDof().getSize()[0] * body.size(), 1, 0.0))
 {};
 
 double Integrator::getTimeStart() const {
@@ -30,6 +32,14 @@ int Integrator::getNSteps() const {
 
 MatrixN Integrator::getdofTimeHistory() const {
 	return this->dofTimeHistory_;
+};
+
+MatrixN Integrator::getMass() const {
+	return this->M_;
+};
+
+MatrixN Integrator::getF() const {
+	return this->f_;
 };
 
 std::ostream& operator<<(std::ostream& out, const Integrator& I) {

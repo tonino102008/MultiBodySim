@@ -28,6 +28,10 @@ public:
 
 	MatrixN getdofTimeHistory() const;
 
+	MatrixN getMass() const;
+
+	MatrixN getF() const;
+
 	friend std::ostream& operator<<(std::ostream& out, const Integrator& I);
 
 	virtual void solve() = 0;
@@ -45,6 +49,10 @@ protected:
 	const int nSteps_;
 
 	MatrixN dofTimeHistory_;
+
+	MatrixN M_;
+
+	MatrixN f_;
 
 	std::vector<std::reference_wrapper<RigidBody>> body_;
 	
