@@ -22,7 +22,7 @@ int main()
 
 	Quaternion qp0(0.0, MatrixN(3, 1, { {0.23}, {0.17}, {sqrt(1 - 0.0 * 0.0 - 0.23 * 0.23 - 0.17 * 0.17)} }));
 	Quaternion q0(1.0, MatrixN(3, 1, 0.0));
-	Quaternion qp1(0.3, MatrixN(3, 1, { {0.23}, {0.17}, {sqrt(1 - 0.3 * 0.3 - 0.23 * 0.23 - 0.17 * 0.17)} }));
+	Quaternion qp1(0.0, MatrixN(3, 1, { {0.1}, {0.6}, {sqrt(1 - 0.0 * 0.0 - 0.1 * 0.1 - 0.6 * 0.6)} }));
 	Quaternion q1(1.0, MatrixN(3, 1, 0.0));
 
 	MatrixN fExt0(3, 1, { {1.0}, {0.0}, {0.0} });
