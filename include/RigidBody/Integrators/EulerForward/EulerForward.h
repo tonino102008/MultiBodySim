@@ -9,7 +9,8 @@ public:
 
 	EulerForward(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual,
-		std::vector<std::reference_wrapper<RigidBody>> body);
+		std::vector<std::reference_wrapper<RigidBody>> body,
+		std::vector<std::reference_wrapper<Constraint>> constraint);
 
 	void solve();
 

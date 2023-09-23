@@ -7,24 +7,37 @@ int main()
 
 	std::cout << "Start Program" << std::endl;
 
-	double mV = 1.0;
-	double JV = 0.5;
+	double mV = 10.0;
+	double JV = 1.0;
 
-	MatrixN m(3, mV);
-	MatrixN J(3, JV);
+	MatrixN m0(3, mV);
+	MatrixN J0(3, JV);
+	MatrixN m1(3, mV * 2.0);
+	MatrixN J1(3, JV * 10.0);
+
 	MatrixN xG(3, 1, 0.0);
-	//xG[0][0] = 1.0;
+	xG[0][0] = 1.0;
 	MatrixN xGp(3, 1, 0.0);
-	//xGp[0][0] = -1.0;
-	//Quaternion q(0.3, MatrixN(3, 1, { {0.5}, {0.7}, {sqrt(1 - 0.3 * 0.3 - 0.5 * 0.5 - 0.7 * 0.7)} }));
-	Quaternion qp(0.0, MatrixN(3, 1, { {0.23}, {0.17}, {sqrt(1 - 0.0 * 0.0 - 0.23 * 0.23 - 0.17 * 0.17)} }));
-	Quaternion q(1.0, MatrixN(3, 1, 0.0));
-	//Quaternion qp(0.0, MatrixN(3, 1, 0.0));
+	xGp[0][0] = -1.0;
 
-	RigidBody Body0(m, J, xG, q, xGp, qp);
-	RigidBody Body1(m, J, xG, q, xGp, qp);
+	Quaternion qp0(0.0, MatrixN(3, 1, { {0.23}, {0.17}, {sqrt(1 - 0.0 * 0.0 - 0.23 * 0.23 - 0.17 * 0.17)} }));
+	Quaternion q0(1.0, MatrixN(3, 1, 0.0));
+	Quaternion qp1(0.3, MatrixN(3, 1, { {0.23}, {0.17}, {sqrt(1 - 0.3 * 0.3 - 0.23 * 0.23 - 0.17 * 0.17)} }));
+	Quaternion q1(1.0, MatrixN(3, 1, 0.0));
 
-	EulerForward I(0.0, 1.0, 0.001, 0.0, std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body0), std::ref(Body1)});
+	MatrixN fExt0(3, 1, { {1.0}, {0.0}, {0.0} });
+	MatrixN fExt1(3, 1, 0.0);
+	MatrixN mExt0(3, 1, 0.0);
+	MatrixN mExt1(3, 1, 1.0);
+
+	RigidBody Body0(m0, J0, xG, q0, xGp, qp0, fExt0, mExt0);
+	RigidBody Body1(m1, J1, xG, q1, xGp, qp1, fExt1, mExt1);
+
+	EqualityC EqC(7, 22);
+
+	EulerForward I(0.0, 1.0, 0.001, 0.0,
+		std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body0), std::ref(Body1)},
+		std::vector<std::reference_wrapper<Constraint>> {std::ref(EqC)});
 
 	auto start = std::chrono::high_resolution_clock::now();
 	I.solve();

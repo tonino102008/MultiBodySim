@@ -2,10 +2,12 @@
 
 RigidBody::RigidBody(const MatrixN& m, const MatrixN& J,
 	const MatrixN& xG0, const Quaternion& q0,
-	const MatrixN& xGp0, const Quaternion& qp0) :
+	const MatrixN& xGp0, const Quaternion& qp0,
+	const MatrixN& fExt, const MatrixN& mExt) :
 	m_(m), J_(J), xG_(xG0), q_(q0), xGp_(xGp0), qp_(qp0),
 	dof_(MatrixN(15, 1)), dofp_(MatrixN(15, 1)),
-	M_(MatrixN(15, 15)), f_(MatrixN(15, 1))
+	M_(MatrixN(15, 15)), f_(MatrixN(15, 1)),
+	fExt_(fExt), mExt_(mExt)
 {
 	this->updateDof();
 
@@ -64,8 +66,8 @@ void RigidBody::updateF() {
 	MatrixN G = this->getG();
 	MatrixN Gp = this->getGp();
 	MatrixN qp = this->qp_.getQuaternion();
-	this->f_.fill(0, 0, MatrixN(3, 1, { {0.0}, {0.0}, {0.0} })); // External Forces
-	this->f_.fill(3, 0, ((((Gp.T()) * this->J_) * G) * (-8.0)) * qp + (G.T() * MatrixN(3, 1, { {0.0}, {0.0}, {0.0} })) * 2.0); // Other + External Momenta
+	this->f_.fill(0, 0, this->fExt_); // External Forces
+	this->f_.fill(3, 0, ((((Gp.T()) * this->J_) * G) * (-8.0)) * qp + (G.T() * this->mExt_) * 2.0); // Other + External Momenta
 	this->f_[3][0] += ((((((qp.T()) * kDGDqs.T()) * this->J_) * G) * qp) * 4.0)[0][0];
 	this->f_[4][0] += ((((((qp.T()) * kDGDqx.T()) * this->J_) * G) * qp) * 4.0)[0][0];
 	this->f_[5][0] += ((((((qp.T()) * kDGDqy.T()) * this->J_) * G) * qp) * 4.0)[0][0];

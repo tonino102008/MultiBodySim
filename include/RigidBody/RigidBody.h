@@ -10,7 +10,8 @@ public:
 
 	RigidBody(const MatrixN& m, const MatrixN& J,
 		const MatrixN& xG0, const Quaternion& q0,
-		const MatrixN& xGp0, const Quaternion& qp0);
+		const MatrixN& xGp0, const Quaternion& qp0,
+		const MatrixN& fExt, const MatrixN& mExt);
 
 	void updateXG(const MatrixN xG);
 
@@ -65,6 +66,10 @@ private:
 	MatrixN M_;
 
 	MatrixN f_;
+
+	MatrixN fExt_;
+
+	MatrixN mExt_;
 
 };
 

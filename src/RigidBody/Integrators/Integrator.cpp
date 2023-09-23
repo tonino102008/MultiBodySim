@@ -1,13 +1,17 @@
 #include "RigidBody/Integrators/Integrator.h"
 
 Integrator::Integrator(const double timeStart, const double timeEnd,
-	const double dt, const double timeActual, std::vector<std::reference_wrapper<RigidBody>> body) :
+	const double dt, const double timeActual,
+	std::vector<std::reference_wrapper<RigidBody>> body,
+	std::vector<std::reference_wrapper<Constraint>> constraint) :
 	timeStart_(timeStart), timeEnd_(timeEnd),
 	dt_(dt), timeActual_(timeActual),
-	nSteps_((timeEnd - timeStart) / dt), body_(body),
-	dofTimeHistory_(MatrixN(body[0].get().getDof().getSize()[0] * body.size(), (timeEnd - timeStart) / dt + 1, 0.0)), // TODO: change initializer for vector of rigid bodies
-	M_(MatrixN(body[0].get().getDof().getSize()[0] * body.size(), body[0].get().getDof().getSize()[0] * body.size(), 0.0)),
-	f_(MatrixN(body[0].get().getDof().getSize()[0] * body.size(), 1, 0.0))
+	nSteps_((timeEnd - timeStart) / dt), body_(body), constraint_(constraint),
+	dofTimeHistory_(MatrixN(body[0].get().getDof().getSize()[0] * body.size() + constraint.size(),
+		(timeEnd - timeStart) / dt + 1, 0.0)),
+	M_(MatrixN(body[0].get().getDof().getSize()[0] * body.size() + constraint.size(),
+		body[0].get().getDof().getSize()[0] * body.size() + constraint.size(), 0.0)),
+	f_(MatrixN(body[0].get().getDof().getSize()[0] * body.size() + constraint.size(), 1, 0.0))
 {};
 
 double Integrator::getTimeStart() const {

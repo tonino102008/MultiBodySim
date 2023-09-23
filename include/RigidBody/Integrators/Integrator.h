@@ -3,6 +3,7 @@
 
 #include "RigidBody/MatrixN/MatrixN.h"
 #include "RigidBody/RigidBody.h"
+#include "RigidBody/Constraints/Constraints.h"
 
 #include <vector>
 #include <ostream>
@@ -11,10 +12,10 @@ class Integrator {
 
 public:
 
-	Integrator();
-
 	Integrator(const double timeStart, const double timeEnd,
-		const double dt, const double timeActual, std::vector<std::reference_wrapper<RigidBody>> body);
+		const double dt, const double timeActual,
+		std::vector<std::reference_wrapper<RigidBody>> body,
+		std::vector<std::reference_wrapper<Constraint>> constraint);
 
 	double getTimeStart() const;
 
@@ -55,6 +56,8 @@ protected:
 	MatrixN f_;
 
 	std::vector<std::reference_wrapper<RigidBody>> body_;
+
+	std::vector<std::reference_wrapper<Constraint>> constraint_;
 	
 };
 
