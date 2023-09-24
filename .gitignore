@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignoring files for Custom Linear Algebra Solver - A.C.
+include/RigidBody/MatrixN
+include/RigidBody/VectorN
+src/RigidBody/MatrixN
+src/RigidBody/VectorN
