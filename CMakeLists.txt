@@ -12,6 +12,8 @@ endif()
 # Set project name
 project ("MultiBodySim")
 
+add_compile_options(/fopenmp /O2 /fp:fast /arch:AVX2)
+
 option(BUILD_TESTS "Build test programs" OFF)
 
 # C++17 Standard
