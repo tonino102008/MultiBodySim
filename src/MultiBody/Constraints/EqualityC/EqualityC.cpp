@@ -1,4 +1,4 @@
-#include "RigidBody/Constraints/EqualityC/EqualityC.h"
+#include "MultiBody/Constraints/EqualityC/EqualityC.h"
 
 EqualityC::EqualityC(const int dof1) :
 	Constraint(dof1)

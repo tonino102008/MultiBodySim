@@ -1,4 +1,4 @@
-#include "RigidBody/Quaternions/Quaternion.h"
+#include "Quaternion.h"
 
 Quaternion::Quaternion() :
 	scalar_(0), vector_(Eigen::Vector3d::Zero())

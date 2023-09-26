@@ -363,7 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Ignoring files for Custom Linear Algebra Solver - A.C.
-include/RigidBody/MatrixN
-include/RigidBody/VectorN
-src/RigidBody/MatrixN
-src/RigidBody/VectorN
+include/MultiBody/MatrixN
+include/MultiBody/VectorN
+src/MultiBody/MatrixN
+src/MultiBody/VectorN

@@ -1,6 +1,6 @@
-#include "RigidBody/Integrators/Integrator.h"
+#include "MultiBody/MultiBody.h"
 
-Integrator::Integrator(const double timeStart, const double timeEnd,
+MultiBody::MultiBody(const double timeStart, const double timeEnd,
 	const double dt, const double timeActual,
 	std::vector<std::reference_wrapper<RigidBody>> body,
 	std::vector<std::reference_wrapper<Constraint>> constraint) :
@@ -14,39 +14,39 @@ Integrator::Integrator(const double timeStart, const double timeEnd,
 	f_(Eigen::VectorXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size()))
 {};
 
-double Integrator::getTimeStart() const {
+double MultiBody::getTimeStart() const {
 	return this->timeStart_;
 };
 
-double Integrator::getTimeEnd() const {
+double MultiBody::getTimeEnd() const {
 	return this->timeEnd_;
 };
 
-double Integrator::getDt() const {
+double MultiBody::getDt() const {
 	return this->dt_;
 };
 
-double Integrator::getTimeActual() const {
+double MultiBody::getTimeActual() const {
 	return this->timeActual_;
 };
 
-int Integrator::getNSteps() const {
+int MultiBody::getNSteps() const {
 	return this->nSteps_;
 };
 
-Eigen::MatrixXd Integrator::getdofTimeHistory() const {
+Eigen::MatrixXd MultiBody::getdofTimeHistory() const {
 	return this->dofTimeHistory_;
 };
 
-Eigen::MatrixXd Integrator::getMass() const {
+Eigen::MatrixXd MultiBody::getMass() const {
 	return this->M_;
 };
 
-Eigen::VectorXd Integrator::getF() const {
+Eigen::VectorXd MultiBody::getF() const {
 	return this->f_;
 };
 
-std::ostream& operator<<(std::ostream& out, const Integrator& I) {
+std::ostream& operator<<(std::ostream& out, const MultiBody& I) {
 	out << "Time vector: [" << I.timeStart_ << ":" << I.dt_ << ":" << I.timeEnd_ << "]s\n" 
 		<< "Actual Time Step: " << I.timeActual_ << "s" << std::endl;
 	out << "DOFs Time Evolution: \n" << I.dofTimeHistory_ << std::endl;

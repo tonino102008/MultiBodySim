@@ -1,18 +1,18 @@
-#ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_INTEGRATOR_H_
-#define MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_INTEGRATOR_H_
+#ifndef MULTIBODYSIM_INCLUDE_MULTIBODY_MULTIBODY_H_
+#define MULTIBODYSIM_INCLUDE_MULTIBODY_MULTIBODY_H_
 
 #include "RigidBody/RigidBody.h"
-#include "RigidBody/Constraints/Constraints.h"
+#include "Constraints/Constraints.h"
 
 #include <Eigen/Dense>
 #include <vector>
 #include <ostream>
 
-class Integrator {
+class MultiBody {
 
 public:
 
-	Integrator(const double timeStart, const double timeEnd,
+	MultiBody(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual,
 		std::vector<std::reference_wrapper<RigidBody>> body,
 		std::vector<std::reference_wrapper<Constraint>> constraint);
@@ -33,7 +33,7 @@ public:
 
 	Eigen::VectorXd getF() const;
 
-	friend std::ostream& operator<<(std::ostream& out, const Integrator& I);
+	friend std::ostream& operator<<(std::ostream& out, const MultiBody& I);
 
 	virtual void solve() = 0;
 
@@ -61,4 +61,4 @@ protected:
 	
 };
 
-#endif // MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_INTEGRATOR_H_
+#endif // MULTIBODYSIM_INCLUDE_MULTIBODY_MULTIBODY_H_

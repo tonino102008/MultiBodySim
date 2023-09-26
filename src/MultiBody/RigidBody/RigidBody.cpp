@@ -1,4 +1,4 @@
-#include "RigidBody/RigidBody.h"
+#include "MultiBody/RigidBody/RigidBody.h"
 
 RigidBody::RigidBody(const Eigen::Matrix3d& m, const Eigen::Matrix3d& J,
 	const Eigen::Vector3d& xG0, const Quaternion& q0,

@@ -2,6 +2,8 @@
 # qui la logica specifica del progetto.
 #
 
+add_subdirectory(Quaternions)
+
 if(BUILD_TESTS)
 	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	add_subdirectory(googletest)

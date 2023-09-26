@@ -1,4 +1,4 @@
-#include "RigidBody/Constraints/Constraints.h"
+#include "MultiBody/Constraints/Constraints.h"
 
 Constraint::Constraint(const int dof1) :
 	dof1_(dof1), dof2_(-1.0), G_(0.0), dGddof_(Eigen::VectorXd(1)), b_(0.0)
