@@ -49,9 +49,9 @@ std::ostream& operator<<(std::ostream& out, const Quaternion& q) {
 };
 
 Quaternion Quaternion::conj() const {
-	return Quaternion(this->scalar_, this->vector_ * (-1.0));
+	return Quaternion(this->scalar_, -1.0 * this->vector_);
 };
 
 double Quaternion::norm() const {
-	return sqrt(this->scalar_ * this->scalar_ + this->vector_.norm());
+	return sqrt(this->scalar_ * this->scalar_ + this->vector_.dot(this->vector_));
 };

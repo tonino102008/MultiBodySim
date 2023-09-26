@@ -18,18 +18,16 @@ void EulerForward::solve() {
 		this->dofTimeHistory_.block<15, 1>(k, 0) = this->body_[j].get().getDof();
 		this->M_.block<15, 15>(k, k) = this->body_[j].get().getMass();
 		this->f_.segment<15>(k) = this->body_[j].get().getF();
-		this->print();
-		//std::cout << "M: \n" << this->M_ << std::endl;
-		//std::cout << "F: \n" << this->f_ << std::endl;
+		//this->print();
 	}
 	for (int j = 0; j < nConstr; j++) {
 		int n = j + nBody * 15;
-		this->constraint_[j].get().updateConstraint(this->dofTimeHistory_.row(0));
+		this->constraint_[j].get().updateConstraint(this->dofTimeHistory_.col(0));
 		const double dof1 = this->constraint_[j].get().getDof1();
 		const double dof2 = this->constraint_[j].get().getDof2();
 		const double dof1p = dof1- 7;
 		const double dof2p = dof2 - 7;
-		this->dofTimeHistory_.coeffRef(n, 0) = 0.0;
+		//this->dofTimeHistory_.coeffRef(n, 0) = 0.0;
 		this->M_.coeffRef(n, dof1) = this->constraint_[j].get().getDGDDof().coeff(0);
 		this->M_.coeffRef(dof1, n) = this->constraint_[j].get().getDGDDof().coeff(0);
 		this->M_.coeffRef(n, dof2) = this->constraint_[j].get().getDGDDof().coeff(1);
@@ -46,21 +44,20 @@ void EulerForward::solve() {
 		this->timeActual_ += this->dt_;
 		Eigen::VectorXd dofp = this->M_.lu().solve(this->f_);
 		Eigen::VectorXd dof = this->dofTimeHistory_.col(i) + dofp * this->dt_;
+		this->dofTimeHistory_.col(i + 1) = dof;
 		for (int j = 0; j < nBody; j++) {
 			int k = j * 15;
 			this->body_[j].get().updateXGp(dof.segment<3>(k));
 			this->body_[j].get().updateQp(Quaternion(dof.coeff(k + 3), dof.segment<3>(k + 4)));
 			this->body_[j].get().updateXG(dof.segment<3>(k + 7));
 			this->body_[j].get().updateQ(Quaternion(dof.coeff(k + 10), dof.segment<3>(k + 11)));
+			this->body_[j].get().updateLambda(dof.coeff(k + 14));
 			this->body_[j].get().updateDof();
 			this->body_[j].get().updateMass();
 			this->body_[j].get().updateF();
-			this->dofTimeHistory_.block<15, 1>(k, i + 1) = this->body_[j].get().getDof();
 			this->M_.block<15, 15>(k, k) = this->body_[j].get().getMass();
 			this->f_.segment<15>(k) = this->body_[j].get().getF();
-			this->print();
-			//std::cout << "M: \n" << this->M_ << std::endl;
-			//std::cout << "F: \n" << this->f_ << std::endl;
+			//this->print();
 		}
 		for (int j = 0; j < nConstr; j++) {
 			int n = j + nBody * 15;
@@ -89,7 +86,7 @@ void EulerForward::print() const {
 	for (int j = 0; j < this->body_.size(); j++) {
 		std::cout << "Dof: \n" << this->body_[j].get().getDof() << std::endl;
 		Quaternion q(this->body_[j].get().getDof().coeff(10), this->body_[j].get().getDof().segment<3>(11));
-		std::cout << "Quaternion Norm: " << q.norm() << std::endl;
+		std::cout << "Quaternion Constraint: " << 1.0 - q.norm() << std::endl;
 	}
 }
 
@@ -97,6 +94,5 @@ void EulerForward::printToFile() const {
 	std::ofstream myfile;
 	myfile.open("output.txt");
 	myfile << this->getdofTimeHistory();
-	//myfile << this->M_;
 	myfile.close();
 };

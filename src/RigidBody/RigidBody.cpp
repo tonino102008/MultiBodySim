@@ -4,7 +4,7 @@ RigidBody::RigidBody(const Eigen::Matrix3d& m, const Eigen::Matrix3d& J,
 	const Eigen::Vector3d& xG0, const Quaternion& q0,
 	const Eigen::Vector3d& xGp0, const Quaternion& qp0,
 	const Eigen::Vector3d& fExt, const Eigen::Vector3d& mExt) :
-	m_(m), J_(J), xG_(xG0), q_(q0), xGp_(xGp0), qp_(qp0),
+	m_(m), J_(J), xG_(xG0), q_(q0), xGp_(xGp0), qp_(qp0), lambda_(0.0),
 	dof_(Eigen::VectorXd::Zero(15)), dofp_(Eigen::VectorXd::Zero(15)),
 	M_(Eigen::MatrixXd::Zero(15, 15)), f_(Eigen::VectorXd::Zero(15)),
 	fExt_(fExt), mExt_(mExt)
@@ -34,11 +34,16 @@ void RigidBody::updateQp(const Quaternion qp) {
 	this->qp_ = qp;
 };
 
+void RigidBody::updateLambda(const double lambda) {
+	this->lambda_ = lambda;
+};
+
 void RigidBody::updateDof() {
 	this->dof_.segment<3>(0) = this->xGp_;
 	this->dof_.segment<4>(3) = this->qp_.getQuaternion();
 	this->dof_.segment<3>(7) = this->xG_;
 	this->dof_.segment<4>(10) = this->q_.getQuaternion();
+	this->dof_.coeffRef(14) = this->lambda_;
 };
 
 void RigidBody::updateMass() {
@@ -56,10 +61,10 @@ void RigidBody::updateMass() {
 	this->M_.coeffRef(14, 4) = qx;
 	this->M_.coeffRef(14, 5) = qy;
 	this->M_.coeffRef(14, 6) = qz;
-	this->M_.coeffRef(14, 10) = 2 * kAlpha * qs;
-	this->M_.coeffRef(14, 11) = 2 * kAlpha * qx;
-	this->M_.coeffRef(14, 12) = 2 * kAlpha * qy;
-	this->M_.coeffRef(14, 13) = 2 * kAlpha * qz;
+	this->M_.coeffRef(14, 10) = 2.0 * kAlpha * qs;
+	this->M_.coeffRef(14, 11) = 2.0 * kAlpha * qx;
+	this->M_.coeffRef(14, 12) = 2.0 * kAlpha * qy;
+	this->M_.coeffRef(14, 13) = 2.0 * kAlpha * qz;
 };
 
 void RigidBody::updateF() {
@@ -74,7 +79,7 @@ void RigidBody::updateF() {
 	this->f_.coeffRef(6) += 4.0 * qp.transpose() * kDGDqz.transpose() * this->J_ * G * qp;
 	this->f_.segment<3>(7) = this->xGp_;
 	this->f_.segment<4>(10) = qp;
-	this->f_.coeffRef(14) = - this->qp_.norm() * this->qp_.norm() + (kBeta * kBeta) - (kBeta * kBeta) * this->q_.norm();
+	this->f_.coeffRef(14) = - this->qp_.norm() * this->qp_.norm() + kBeta * kBeta * (1.0 - this->q_.norm());
 };
 
 Eigen::MatrixXd RigidBody::getG() const {
@@ -146,9 +151,9 @@ Eigen::VectorXd RigidBody::getF() const {
 };
 
 Eigen::VectorXd RigidBody::getWGlobal() const {
-	return (this->qp_ * (this->q_.conj())).getQuaternion() * 2.0;
+	return (this->qp_ * this->q_.conj()).getQuaternion() * 2.0;
 };
 
 Eigen::VectorXd RigidBody::getWLocal() const {
-	return ((this->q_.conj()) * this->qp_).getQuaternion() * 2.0;
+	return (this->q_.conj() * this->qp_).getQuaternion() * 2.0;
 };

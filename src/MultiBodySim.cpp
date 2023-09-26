@@ -20,9 +20,9 @@ int main()
 	Eigen::Vector3d xG(1.0, 0.0, 0.0);
 	Eigen::Vector3d xGp(-1.0, 0.0, 0.0);
 
-	Quaternion qp0(0.0, Eigen::Vector3d (0.23, 0.17, sqrt(1 - 0.0 * 0.0 - 0.23 * 0.23 - 0.17 * 0.17)));
+	Quaternion qp0(0.0, Eigen::Vector3d (0.23, 0.17, sqrt(1.0 - 0.0 * 0.0 - 0.23 * 0.23 - 0.17 * 0.17)));
 	Quaternion q0(1.0, Eigen::Vector3d::Zero());
-	Quaternion qp1(0.0, Eigen::Vector3d (0.1, 0.6, sqrt(1 - 0.0 * 0.0 - 0.1 * 0.1 - 0.6 * 0.6)));
+	Quaternion qp1(0.0, Eigen::Vector3d (0.1, 0.6, sqrt(1.0 - 0.0 * 0.0 - 0.1 * 0.1 - 0.6 * 0.6)));
 	Quaternion q1(1.0, Eigen::Vector3d::Zero());
 
 	Eigen::Vector3d fExt0(1.0, 0.0, 0.0);
@@ -35,13 +35,9 @@ int main()
 
 	EqualityC EqC(7, 22);
 
-	//EulerForward I(0.0, 1, 0.001, 0.0,
-		//std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body0), std::ref(Body1)},
-		//std::vector<std::reference_wrapper<Constraint>> {std::ref(EqC)});
-
-	EulerForward I(0.0, 0.1, 0.001, 0.0,
-		std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body0)},
-		std::vector<std::reference_wrapper<Constraint>> {});
+	EulerForward I(0.0, 10.0, 0.001, 0.0,
+		std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body0), std::ref(Body1)},
+		std::vector<std::reference_wrapper<Constraint>> {std::ref(EqC)});
 
 	auto start = std::chrono::high_resolution_clock::now();
 	I.solve();

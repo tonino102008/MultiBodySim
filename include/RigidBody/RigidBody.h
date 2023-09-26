@@ -21,6 +21,8 @@ public:
 
 	void updateQp(const Quaternion qp);
 
+	void updateLambda(const double lambda);
+
 	void updateDof();
 
 	void updateMass();
@@ -54,6 +56,8 @@ private:
 	Quaternion q_; // State rotation quaternion [qs,qx,qy,qz]
 
 	Quaternion qp_; // State rotation quaternion [qps,qpx,qpy,qpz]
+
+	double lambda_;
 
 	Eigen::VectorXd dof_; // Full State [xpG,ypG,zpG,qps,qpx,qpy,qpz,xG,yG,zG,qs,qx,qy,qz,lambda]
 
