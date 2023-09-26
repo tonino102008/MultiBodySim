@@ -6,11 +6,9 @@ set(RIGIDBODY_SOURCES RigidBody.cpp)
 
 add_subdirectory(Integrators)
 add_subdirectory(Quaternions)
-#add_subdirectory(VectorN)
-add_subdirectory(MatrixN)
 add_subdirectory(Constraints)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(RigidBody ${RIGIDBODY_SOURCES})
 
-target_link_libraries(RigidBody Integrators Quaternions MatrixN Constraints) # VectorN)
+target_link_libraries(RigidBody Integrators Quaternions Constraints Eigen3::Eigen)

@@ -1,10 +1,10 @@
 #ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_INTEGRATOR_H_
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_INTEGRATORS_INTEGRATOR_H_
 
-#include "RigidBody/MatrixN/MatrixN.h"
 #include "RigidBody/RigidBody.h"
 #include "RigidBody/Constraints/Constraints.h"
 
+#include <Eigen/Dense>
 #include <vector>
 #include <ostream>
 
@@ -27,11 +27,11 @@ public:
 
 	int getNSteps() const;
 
-	MatrixN getdofTimeHistory() const;
+	Eigen::MatrixXd getdofTimeHistory() const;
 
-	MatrixN getMass() const;
+	Eigen::MatrixXd getMass() const;
 
-	MatrixN getF() const;
+	Eigen::VectorXd getF() const;
 
 	friend std::ostream& operator<<(std::ostream& out, const Integrator& I);
 
@@ -49,11 +49,11 @@ protected:
 
 	const int nSteps_;
 
-	MatrixN dofTimeHistory_;
+	Eigen::MatrixXd dofTimeHistory_;
 
-	MatrixN M_;
+	Eigen::MatrixXd M_;
 
-	MatrixN f_;
+	Eigen::VectorXd f_;
 
 	std::vector<std::reference_wrapper<RigidBody>> body_;
 

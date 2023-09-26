@@ -1,7 +1,7 @@
 #ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_QUATERNIONS_QUATERNION_H_
 
-#include "RigidBody/MatrixN/MatrixN.h"
+#include "Eigen/Dense"
 
 #include <cmath>
 #include <ostream>
@@ -12,13 +12,13 @@ public:
 
 	Quaternion();
 
-	Quaternion(const double s, const MatrixN& m);
+	Quaternion(const double s, const Eigen::Vector3d& m);
 
-	MatrixN getQuaternion() const;
+	Eigen::VectorXd getQuaternion() const;
 
 	double getScalar() const;
 
-	MatrixN getVector() const;
+	Eigen::Vector3d getVector() const;
 
 	double qx() const;
 
@@ -40,7 +40,7 @@ private:
 
 	double scalar_;
 
-	MatrixN vector_;
+	Eigen::Vector3d vector_;
 
 };
 

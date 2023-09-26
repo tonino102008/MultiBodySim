@@ -11,7 +11,7 @@ public:
 
 	EqualityC(const int dof1, const int dof2);
 
-	void updateConstraint(const MatrixN& dof);
+	void updateConstraint(const Eigen::VectorXd& dof);
 
 private:
 

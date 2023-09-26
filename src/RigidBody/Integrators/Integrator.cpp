@@ -7,11 +7,11 @@ Integrator::Integrator(const double timeStart, const double timeEnd,
 	timeStart_(timeStart), timeEnd_(timeEnd),
 	dt_(dt), timeActual_(timeActual),
 	nSteps_((timeEnd - timeStart) / dt), body_(body), constraint_(constraint),
-	dofTimeHistory_(MatrixN(body[0].get().getDof().getSize()[0] * body.size() + constraint.size(),
-		(timeEnd - timeStart) / dt + 1, 0.0)),
-	M_(MatrixN(body[0].get().getDof().getSize()[0] * body.size() + constraint.size(),
-		body[0].get().getDof().getSize()[0] * body.size() + constraint.size(), 0.0)),
-	f_(MatrixN(body[0].get().getDof().getSize()[0] * body.size() + constraint.size(), 1, 0.0))
+	dofTimeHistory_(Eigen::MatrixXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size(),
+		static_cast<int>((timeEnd - timeStart) / dt + 1))),
+	M_(Eigen::MatrixXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size(),
+		body[0].get().getDof().rows()* body.size() + constraint.size())),
+	f_(Eigen::VectorXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size()))
 {};
 
 double Integrator::getTimeStart() const {
@@ -34,15 +34,15 @@ int Integrator::getNSteps() const {
 	return this->nSteps_;
 };
 
-MatrixN Integrator::getdofTimeHistory() const {
+Eigen::MatrixXd Integrator::getdofTimeHistory() const {
 	return this->dofTimeHistory_;
 };
 
-MatrixN Integrator::getMass() const {
+Eigen::MatrixXd Integrator::getMass() const {
 	return this->M_;
 };
 
-MatrixN Integrator::getF() const {
+Eigen::VectorXd Integrator::getF() const {
 	return this->f_;
 };
 

@@ -8,14 +8,14 @@ class RigidBody {
 
 public:
 
-	RigidBody(const MatrixN& m, const MatrixN& J,
-		const MatrixN& xG0, const Quaternion& q0,
-		const MatrixN& xGp0, const Quaternion& qp0,
-		const MatrixN& fExt, const MatrixN& mExt);
+	RigidBody(const Eigen::Matrix3d& m, const Eigen::Matrix3d& J,
+		const Eigen::Vector3d& xG0, const Quaternion& q0,
+		const Eigen::Vector3d& xGp0, const Quaternion& qp0,
+		const Eigen::Vector3d& fExt, const Eigen::Vector3d& mExt);
 
-	void updateXG(const MatrixN xG);
+	void updateXG(const Eigen::Vector3d xG);
 
-	void updateXGp(const MatrixN xGp);
+	void updateXGp(const Eigen::Vector3d xGp);
 
 	void updateQ(const Quaternion q);
 
@@ -27,49 +27,49 @@ public:
 
 	void updateF();
 
-	MatrixN getG() const;
+	Eigen::MatrixXd getG() const;
 
-	MatrixN getGp() const;
+	Eigen::MatrixXd getGp() const;
 
-	MatrixN getE() const;
+	Eigen::MatrixXd getE() const;
 
-	MatrixN getEp() const;
+	Eigen::MatrixXd getEp() const;
 
-	MatrixN getDof() const;
+	Eigen::VectorXd getDof() const;
 
-	MatrixN getMass() const;
+	Eigen::MatrixXd getMass() const;
 
-	MatrixN getF() const;
+	Eigen::VectorXd getF() const;
 
-	MatrixN getWGlobal() const;
+	Eigen::VectorXd getWGlobal() const;
 
-	MatrixN getWLocal() const;
+	Eigen::VectorXd getWLocal() const;
 
 private:
 
-	MatrixN xG_; // State translation vector [xG,yG,zG]
+	Eigen::Vector3d xG_; // State translation vector [xG,yG,zG]
 
-	MatrixN xGp_; // State translation vector [xpG,ypG,zpG]
+	Eigen::Vector3d xGp_; // State translation vector [xpG,ypG,zpG]
 
 	Quaternion q_; // State rotation quaternion [qs,qx,qy,qz]
 
 	Quaternion qp_; // State rotation quaternion [qps,qpx,qpy,qpz]
 
-	MatrixN dof_; // Full State [xpG,ypG,zpG,qps,qpx,qpy,qpz,xG,yG,zG,qs,qx,qy,qz,lambda]
+	Eigen::VectorXd dof_; // Full State [xpG,ypG,zpG,qps,qpx,qpy,qpz,xG,yG,zG,qs,qx,qy,qz,lambda]
 
-	MatrixN dofp_; // Full State [xppG,yppG,zppG,qpps,qppx,qppy,qppz,xpG,ypG,zpG,qps,qpx,qpy,qpz,lambdap]
+	Eigen::VectorXd dofp_; // Full State [xppG,yppG,zppG,qpps,qppx,qppy,qppz,xpG,ypG,zpG,qps,qpx,qpy,qpz,lambdap]
 
-	MatrixN m_;
+	Eigen::Matrix3d m_;
 
-	MatrixN J_;
+	Eigen::Matrix3d J_;
 
-	MatrixN M_;
+	Eigen::MatrixXd M_;
 
-	MatrixN f_;
+	Eigen::VectorXd f_;
 
-	MatrixN fExt_;
+	Eigen::Vector3d fExt_;
 
-	MatrixN mExt_;
+	Eigen::Vector3d mExt_;
 
 };
 

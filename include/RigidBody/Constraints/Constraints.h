@@ -1,7 +1,7 @@
 #ifndef MULTIBODYSIM_INCLUDE_RIGIDBODY_CONSTRAINTS_CONSTRAINT_H_
 #define MULTIBODYSIM_INCLUDE_RIGIDBODY_CONSTRAINTS_CONSTRAINT_H_
 
-#include "RigidBody/MatrixN/MatrixN.h"
+#include <Eigen/Dense>
 
 class Constraint {
 
@@ -17,11 +17,11 @@ public:
 
 	double getG() const;
 
-	MatrixN getDGDDof() const;
+	Eigen::VectorXd getDGDDof() const;
 
 	double getB() const;
 
-	virtual void updateConstraint(const MatrixN& dof) = 0;
+	virtual void updateConstraint(const Eigen::VectorXd& dof) = 0;
 
 protected:
 
@@ -31,7 +31,7 @@ protected:
 
 	double G_;
 
-	MatrixN dGddof_;
+	Eigen::VectorXd dGddof_;
 
 	double b_; // The variable b_ represents: dGddofdt_ * dofp_
 

@@ -9,4 +9,4 @@ add_subdirectory(EulerForward)
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(Integrators ${INTEGRATORS_SOURCES})
 
-target_link_libraries(Integrators EulerForward)
+target_link_libraries(Integrators EulerForward Eigen3::Eigen)

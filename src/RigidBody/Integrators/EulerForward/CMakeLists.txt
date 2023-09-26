@@ -6,3 +6,5 @@ set(EULERFORWARD_SOURCES EulerForward.cpp)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(EulerForward ${EULERFORWARD_SOURCES})
+
+target_link_libraries(EulerForward Eigen3::Eigen)

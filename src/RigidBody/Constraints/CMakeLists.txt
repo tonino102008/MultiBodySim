@@ -9,4 +9,4 @@ add_subdirectory(EqualityC)
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(Constraints ${CONSTRAINTS_SOURCES})
 
-target_link_libraries(Constraints EqualityC)
+target_link_libraries(Constraints EqualityC Eigen3::Eigen)
