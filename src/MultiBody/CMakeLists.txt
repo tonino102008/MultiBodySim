@@ -11,4 +11,4 @@ add_subdirectory(EulerForward)
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(MultiBody ${MULTIBODY_SOURCES})
 
-target_link_libraries(MultiBody Constraints RigidBody EulerForward Eigen3::Eigen)
+target_link_libraries(MultiBody Constraints RigidBody Eigen3::Eigen)
