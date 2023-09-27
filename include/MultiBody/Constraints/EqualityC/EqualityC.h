@@ -1,7 +1,7 @@
 #ifndef MULTIBODYSIM_INCLUDE_MULTIBODY_CONSTRAINTS_EQUALITYC_EQUALITYC_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_CONSTRAINTS_EQUALITYC_EQUALITYC_H_
 
-#include "MultiBody/Constraints/Constraints.h"
+#include "MultiBody/Constraints/Constraint.h"
 
 class EqualityC : public Constraint {
 

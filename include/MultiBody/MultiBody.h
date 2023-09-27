@@ -2,7 +2,7 @@
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_MULTIBODY_H_
 
 #include "RigidBody/RigidBody.h"
-#include "Constraints/Constraints.h"
+#include "Constraints/Constraint.h"
 
 #include <Eigen/Dense>
 #include <vector>

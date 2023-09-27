@@ -2,7 +2,7 @@
 # qui la logica specifica del progetto.
 #
 
-set(CONSTRAINTS_SOURCES Constraints.cpp)
+set(CONSTRAINTS_SOURCES Constraint.cpp)
 
 add_subdirectory(EqualityC)
 

@@ -38,7 +38,7 @@ void EulerForward::solve() {
 		this->M_.coeffRef(dof2p, n) = 2.0 * kAlpha * this->constraint_[j].get().getDGDDof().coeff(1);
 		this->f_.coeffRef(n) = this->constraint_[j].get().getB()
 			- kBeta * kBeta * this->constraint_[j].get().getG();
-		std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
+		//std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
 	}
 	for (int i = 0; i < this->nSteps_; i++) {
 		this->timeActual_ += this->dt_;
@@ -76,7 +76,7 @@ void EulerForward::solve() {
 			this->M_.coeffRef(dof2p, n) = 2.0 * kAlpha * this->constraint_[j].get().getDGDDof().coeff(1);
 			this->f_.coeffRef(n) = this->constraint_[j].get().getB()
 				- kBeta * kBeta * this->constraint_[j].get().getG();
-			std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
+			//std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
 		}
 	}
 };

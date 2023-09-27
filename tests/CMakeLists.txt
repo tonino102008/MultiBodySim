@@ -9,8 +9,7 @@ add_executable(${TEST_NAME} ${TEST_SOURCE})
 
 target_link_libraries(${TEST_NAME} PUBLIC
 	gtest_main
-	Quaternions
-	Integrators
+	MultiBody
 )
 
 add_test(

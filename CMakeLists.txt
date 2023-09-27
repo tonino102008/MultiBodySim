@@ -12,8 +12,6 @@ endif()
 # Set project name
 project ("MultiBodySim")
 
-#add_compile_options(/fopenmp /O2 /fp:fast /arch:AVX2)
-
 option(BUILD_TESTS "Build test programs" OFF)
 
 # C++17 Standard
@@ -28,6 +26,14 @@ set(LIBS Quaternions)
 set(LIBS_DIR lib)
 
 find_package(Eigen3 3.4 REQUIRED NO_MODULE)
+
+if (WIN32 OR MSVC)
+  #add_compile_options(/fopenmp /O2 /fp:fast /arch:AVX2)
+endif (WIN32 OR MSVC)
+if (UNIX)
+  #add_compile_options(-O2 -Ofast -march=native)
+  #add_compile_definitions(EIGEN_DONT_PARALLELIZE)
+endif (UNIX)
 
 foreach(LIBRARY ${LIBS})
     include_directories("${LIBS_DIR}/${LIBS}/include")
