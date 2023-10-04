@@ -3,6 +3,7 @@
 
 #include "RigidBody/RigidBody.h"
 #include "Constraints/Constraint.h"
+#include "External/External.h"
 
 #include <Eigen/Dense>
 #include <vector>
@@ -15,7 +16,8 @@ public:
 	MultiBody(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual,
 		std::vector<std::reference_wrapper<RigidBody>> body,
-		std::vector<std::reference_wrapper<Constraint>> constraint);
+		std::vector<std::reference_wrapper<Constraint>> constraint,
+		std::vector<std::reference_wrapper<External>> external);
 
 	double getTimeStart() const;
 
@@ -58,6 +60,8 @@ protected:
 	std::vector<std::reference_wrapper<RigidBody>> body_;
 
 	std::vector<std::reference_wrapper<Constraint>> constraint_;
+
+	std::vector<std::reference_wrapper<External>> external_;
 	
 };
 

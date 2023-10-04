@@ -19,6 +19,8 @@ const Eigen::MatrixXd kDGDqz = (Eigen::MatrixXd(3, 4) << 0.0, 0.0, 1.0, 0.0,
 const double kAlpha = 1000.0;
 const double kBeta = 1000.0;
 
-const double kG = 9.80665;
+const double kG = -9.80665;
+
+const int kDof = 15;
 
 #endif // MULTIBODYSIM_INCLUDE_MULTIBODY_RIGIDBODY_RIGIDBODYCONST_H_

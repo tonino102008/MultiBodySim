@@ -3,10 +3,11 @@
 MultiBody::MultiBody(const double timeStart, const double timeEnd,
 	const double dt, const double timeActual,
 	std::vector<std::reference_wrapper<RigidBody>> body,
-	std::vector<std::reference_wrapper<Constraint>> constraint) :
+	std::vector<std::reference_wrapper<Constraint>> constraint,
+	std::vector<std::reference_wrapper<External>> external) :
 	timeStart_(timeStart), timeEnd_(timeEnd),
 	dt_(dt), timeActual_(timeActual),
-	nSteps_((timeEnd - timeStart) / dt), body_(body), constraint_(constraint),
+	nSteps_((timeEnd - timeStart) / dt), body_(body), constraint_(constraint), external_(external),
 	dofTimeHistory_(Eigen::MatrixXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size(),
 		static_cast<int>((timeEnd - timeStart) / dt + 1))),
 	M_(Eigen::MatrixXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size(),

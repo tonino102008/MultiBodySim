@@ -71,6 +71,8 @@ private:
 
 	Eigen::VectorXd f_;
 
+	Eigen::Vector3d fG_;
+
 	Eigen::Vector3d fExt_;
 
 	Eigen::Vector3d mExt_;

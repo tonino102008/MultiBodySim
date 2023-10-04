@@ -6,9 +6,10 @@ set(MULTIBODY_SOURCES MultiBody.cpp)
 
 add_subdirectory(Constraints)
 add_subdirectory(RigidBody)
+add_subdirectory(External)
 add_subdirectory(EulerForward)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(MultiBody ${MULTIBODY_SOURCES})
 
-target_link_libraries(MultiBody Constraints RigidBody Eigen3::Eigen)
+target_link_libraries(MultiBody Constraints RigidBody External Eigen3::Eigen)

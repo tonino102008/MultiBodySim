@@ -5,9 +5,9 @@ RigidBody::RigidBody(const Eigen::Matrix3d& m, const Eigen::Matrix3d& J,
 	const Eigen::Vector3d& xGp0, const Quaternion& qp0,
 	const Eigen::Vector3d& fExt, const Eigen::Vector3d& mExt) :
 	m_(m), J_(J), xG_(xG0), q_(q0), xGp_(xGp0), qp_(qp0), lambda_(0.0),
-	dof_(Eigen::VectorXd::Zero(15)), dofp_(Eigen::VectorXd::Zero(15)),
-	M_(Eigen::MatrixXd::Zero(15, 15)), f_(Eigen::VectorXd::Zero(15)),
-	fExt_(fExt), mExt_(mExt)
+	dof_(Eigen::VectorXd::Zero(kDof)), dofp_(Eigen::VectorXd::Zero(kDof)),
+	M_(Eigen::MatrixXd::Zero(kDof, kDof)), f_(Eigen::VectorXd::Zero(kDof)),
+	fG_(Eigen::Vector3d(0.0, 0.0, m.coeff(1, 1) * kG)), fExt_(fExt), mExt_(mExt)
 {
 	this->updateDof();
 
@@ -71,7 +71,7 @@ void RigidBody::updateF() {
 	Eigen::MatrixXd G = this->getG();
 	Eigen::MatrixXd Gp = this->getGp();
 	Eigen::VectorXd qp = this->qp_.getQuaternion();
-	this->f_.segment<3>(0) = this->fExt_; // External Forces
+	this->f_.segment<3>(0) = this->fExt_ + this->fG_; // External Forces + Gravity Force
 	this->f_.segment<4>(3) = -8.0 * Gp.transpose() * this->J_ * G * qp + 2.0 * G.transpose() * this->mExt_; // Other + External Momenta
 	this->f_.coeffRef(3) += 4.0 * qp.transpose() * kDGDqs.transpose() * this->J_ * G * qp;
 	this->f_.coeffRef(4) += 4.0 * qp.transpose() * kDGDqx.transpose() * this->J_ * G * qp;
