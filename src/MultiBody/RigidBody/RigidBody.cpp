@@ -2,12 +2,11 @@
 
 RigidBody::RigidBody(const Eigen::Matrix3d& m, const Eigen::Matrix3d& J,
 	const Eigen::Vector3d& xG0, const Quaternion& q0,
-	const Eigen::Vector3d& xGp0, const Quaternion& qp0,
-	const Eigen::Vector3d& fExt, const Eigen::Vector3d& mExt) :
+	const Eigen::Vector3d& xGp0, const Quaternion& qp0) :
 	m_(m), J_(J), xG_(xG0), q_(q0), xGp_(xGp0), qp_(qp0), lambda_(0.0),
 	dof_(Eigen::VectorXd::Zero(kDof)), dofp_(Eigen::VectorXd::Zero(kDof)),
 	M_(Eigen::MatrixXd::Zero(kDof, kDof)), f_(Eigen::VectorXd::Zero(kDof)),
-	fG_(Eigen::Vector3d(0.0, 0.0, m.coeff(1, 1) * kG)), fExt_(fExt), mExt_(mExt)
+	fG_(Eigen::Vector3d(0.0, 0.0, m.coeff(1, 1) * kG))
 {
 	this->updateDof();
 
@@ -71,8 +70,8 @@ void RigidBody::updateF() {
 	Eigen::MatrixXd G = this->getG();
 	Eigen::MatrixXd Gp = this->getGp();
 	Eigen::VectorXd qp = this->qp_.getQuaternion();
-	this->f_.segment<3>(0) = this->fExt_ + this->fG_; // External Forces + Gravity Force
-	this->f_.segment<4>(3) = -8.0 * Gp.transpose() * this->J_ * G * qp + 2.0 * G.transpose() * this->mExt_; // Other + External Momenta
+	this->f_.segment<3>(0) = this->fG_; // Gravity Force
+	this->f_.segment<4>(3) = -8.0 * Gp.transpose() * this->J_ * G * qp;// +2.0 * G.transpose() * this->mExt_; External Momenta
 	this->f_.coeffRef(3) += 4.0 * qp.transpose() * kDGDqs.transpose() * this->J_ * G * qp;
 	this->f_.coeffRef(4) += 4.0 * qp.transpose() * kDGDqx.transpose() * this->J_ * G * qp;
 	this->f_.coeffRef(5) += 4.0 * qp.transpose() * kDGDqy.transpose() * this->J_ * G * qp;
@@ -80,6 +79,21 @@ void RigidBody::updateF() {
 	this->f_.segment<3>(7) = this->xGp_;
 	this->f_.segment<4>(10) = qp;
 	this->f_.coeffRef(14) = - this->qp_.norm() * this->qp_.norm() + kBeta * kBeta * (1.0 - this->q_.norm());
+};
+
+void RigidBody::updateBody(const Eigen::VectorXd& dof,
+	Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k) {
+	this->updateXGp(dof.segment<3>(k));
+	this->updateQp(Quaternion(dof.coeff(k + 3), dof.segment<3>(k + 4)));
+	this->updateXG(dof.segment<3>(k + 7));
+	this->updateQ(Quaternion(dof.coeff(k + 10), dof.segment<3>(k + 11)));
+	this->updateLambda(dof.coeff(k + 14));
+	this->updateDof();
+	this->updateMass();
+	this->updateF();
+
+	M.block<kDof, kDof>(k, k) = this->M_;
+	f.segment<kDof>(k) = this->f_;
 };
 
 Eigen::MatrixXd RigidBody::getG() const {

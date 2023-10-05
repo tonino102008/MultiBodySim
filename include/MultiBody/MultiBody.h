@@ -4,6 +4,7 @@
 #include "RigidBody/RigidBody.h"
 #include "Constraints/Constraint.h"
 #include "External/External.h"
+#include "TimeSim.h"
 
 #include <Eigen/Dense>
 #include <vector>
@@ -15,19 +16,7 @@ public:
 
 	MultiBody(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual,
-		std::vector<std::reference_wrapper<RigidBody>> body,
-		std::vector<std::reference_wrapper<Constraint>> constraint,
-		std::vector<std::reference_wrapper<External>> external);
-
-	double getTimeStart() const;
-
-	double getTimeEnd() const;
-
-	double getDt() const;
-
-	double getTimeActual() const;
-
-	int getNSteps() const;
+		const int nBody, const int nConstr, const int nExt);
 
 	Eigen::MatrixXd getdofTimeHistory() const;
 
@@ -35,21 +24,23 @@ public:
 
 	Eigen::VectorXd getF() const;
 
+	void setTime(const TimeSim& time);
+
+	void setBody(const RigidBody& body, const int i);
+
+	template <typename T> void setConstr(const T& constr, const int i) {
+		this->constraint_[i] = std::make_unique<T>(constr);
+	};
+
+	template <typename T> void setExt(const T& ext, const int i) {
+		this->external_[i] = std::make_unique<T>(ext);
+	};
+
 	friend std::ostream& operator<<(std::ostream& out, const MultiBody& I);
 
 	virtual void solve() = 0;
 
 protected:
-
-	const double timeStart_;
-
-	const double timeEnd_;
-
-	const double dt_;
-
-	double timeActual_;
-
-	const int nSteps_;
 
 	Eigen::MatrixXd dofTimeHistory_;
 
@@ -57,11 +48,23 @@ protected:
 
 	Eigen::VectorXd f_;
 
-	std::vector<std::reference_wrapper<RigidBody>> body_;
+	std::unique_ptr<TimeSim> time_;
 
-	std::vector<std::reference_wrapper<Constraint>> constraint_;
+	std::vector<std::unique_ptr<RigidBody>> body_;
 
-	std::vector<std::reference_wrapper<External>> external_;
+	std::vector<std::unique_ptr<Constraint>> constraint_;
+
+	std::vector<std::unique_ptr<External>> external_;
+
+	const int nBody_;
+
+	const int nConstr_;
+
+	const int nExt_ ;
+
+private:
+
+	virtual void solve0() = 0;
 	
 };
 

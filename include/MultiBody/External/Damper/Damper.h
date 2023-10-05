@@ -13,7 +13,7 @@ public:
 
 	Damper(const int dof1, const int dof2, const double r);
 
-	void updateExt(const Eigen::VectorXd& dof);
+	void updateExternal(const Eigen::VectorXd& dof, Eigen::VectorXd& f);
 
 private:
 

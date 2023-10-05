@@ -2,6 +2,7 @@
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_CONSTRAINTS_EQUALITYC_EQUALITYC_H_
 
 #include "MultiBody/Constraints/Constraint.h"
+#include "MultiBody/RigidBody/RigidBodyConst.h"
 
 class EqualityC : public Constraint {
 
@@ -11,7 +12,8 @@ public:
 
 	EqualityC(const int dof1, const int dof2);
 
-	void updateConstraint(const Eigen::VectorXd& dof);
+	void updateConstraint(const Eigen::VectorXd& dof,
+		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k);
 
 private:
 

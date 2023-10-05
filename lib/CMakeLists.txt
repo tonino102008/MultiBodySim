@@ -3,6 +3,7 @@
 #
 
 add_subdirectory(Quaternions)
+add_subdirectory(TimeSim)
 
 if(BUILD_TESTS)
 	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)

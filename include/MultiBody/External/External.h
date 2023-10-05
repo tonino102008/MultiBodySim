@@ -17,7 +17,7 @@ public:
 
 	double getExt() const;
 
-	virtual void updateExt(const Eigen::VectorXd& dof) = 0;
+	virtual void updateExternal(const Eigen::VectorXd& dof, Eigen::VectorXd& f) = 0;
 
 protected:
 

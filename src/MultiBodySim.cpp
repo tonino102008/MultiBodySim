@@ -9,6 +9,8 @@ int main()
 
 	std::cout << "Start Program" << std::endl;
 
+	// DATA
+
 	double mV = 10.0;
 	double JV = 1.0;
 
@@ -28,22 +30,22 @@ int main()
 	Quaternion qp1(0.0, Eigen::Vector3d (0.1, 0.6, sqrt(1.0 - 0.0 * 0.0 - 0.1 * 0.1 - 0.6 * 0.6)));
 	Quaternion q1(1.0, Eigen::Vector3d::Zero());
 
-	Eigen::Vector3d fExt0(1.0, 0.0, 0.0);
-	Eigen::Vector3d fExt1(0.0, 0.0, 0.0);
-	Eigen::Vector3d mExt0(0.0, 0.0, 0.0);
-	Eigen::Vector3d mExt1(1.0, 1.0, 1.0);
+	// END - DATA
+	// 
+	// MULTIBODY
 
-	RigidBody Body0(m0, J0, xG0, q0, xGp0, qp0, fExt0, mExt0);
-	RigidBody Body1(m1, J1, xG1, q1, xGp1, qp1, fExt1, mExt1);
+	EulerForward I(0.0, 10.0, 0.001, 0.0, 2, 1, 1);
 
-	EqualityC EqC(7, 22);
+	I.setBody(RigidBody(m0, J0, xG0, q0, xGp0, qp0), 0);
+	I.setBody(RigidBody(m1, J1, xG1, q1, xGp1, qp1), 1);
 
-	Spring Spr(8, 23, 10.0, 0.0);
+	I.setConstr(EqualityC(7, 22), 0);
 
-	EulerForward I(0.0, 10.0, 0.001, 0.0,
-		std::vector<std::reference_wrapper<RigidBody>> {std::ref(Body0), std::ref(Body1)},
-		std::vector<std::reference_wrapper<Constraint>> {std::ref(EqC)},
-		std::vector<std::reference_wrapper<External>> {std::ref(Spr)});
+	I.setExt(Spring(8, 23, 10.0, 0.0), 0);
+
+	// END - MULTIBODY
+	//
+	// SOLVE EOMs
 
 	auto start = std::chrono::high_resolution_clock::now();
 	I.solve();
@@ -53,6 +55,8 @@ int main()
 	std::cout << "Time taken by function: " << duration.count() / 1000.0 << " seconds" << std::endl;
 
 	I.printToFile();
+
+	// END - SOLVE EOMs
 
 	std::cout << "End Program" << std::endl;
 

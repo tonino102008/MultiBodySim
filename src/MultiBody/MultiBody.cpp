@@ -2,38 +2,15 @@
 
 MultiBody::MultiBody(const double timeStart, const double timeEnd,
 	const double dt, const double timeActual,
-	std::vector<std::reference_wrapper<RigidBody>> body,
-	std::vector<std::reference_wrapper<Constraint>> constraint,
-	std::vector<std::reference_wrapper<External>> external) :
-	timeStart_(timeStart), timeEnd_(timeEnd),
-	dt_(dt), timeActual_(timeActual),
-	nSteps_((timeEnd - timeStart) / dt), body_(body), constraint_(constraint), external_(external),
-	dofTimeHistory_(Eigen::MatrixXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size(),
+	const int nBody, const int nConstr, const int nExt) :
+	time_(std::make_unique<TimeSim>(timeStart, timeEnd, dt, timeActual)),
+	body_(nBody), constraint_(nConstr), external_(nExt),
+	dofTimeHistory_(Eigen::MatrixXd::Zero(kDof * nBody + nConstr,
 		static_cast<int>((timeEnd - timeStart) / dt + 1))),
-	M_(Eigen::MatrixXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size(),
-		body[0].get().getDof().rows()* body.size() + constraint.size())),
-	f_(Eigen::VectorXd::Zero(body[0].get().getDof().rows() * body.size() + constraint.size()))
+	M_(Eigen::MatrixXd::Zero(kDof* nBody + nConstr,	kDof* nBody + nConstr)),
+	f_(Eigen::VectorXd::Zero(kDof* nBody + nConstr)),
+	nBody_(nBody), nConstr_(nConstr), nExt_(nExt)
 {};
-
-double MultiBody::getTimeStart() const {
-	return this->timeStart_;
-};
-
-double MultiBody::getTimeEnd() const {
-	return this->timeEnd_;
-};
-
-double MultiBody::getDt() const {
-	return this->dt_;
-};
-
-double MultiBody::getTimeActual() const {
-	return this->timeActual_;
-};
-
-int MultiBody::getNSteps() const {
-	return this->nSteps_;
-};
 
 Eigen::MatrixXd MultiBody::getdofTimeHistory() const {
 	return this->dofTimeHistory_;
@@ -47,9 +24,13 @@ Eigen::VectorXd MultiBody::getF() const {
 	return this->f_;
 };
 
+void MultiBody::setBody(const RigidBody& body, const int i) {
+	this->body_[i] = std::make_unique<RigidBody>(body);
+};
+
 std::ostream& operator<<(std::ostream& out, const MultiBody& I) {
-	out << "Time vector: [" << I.timeStart_ << ":" << I.dt_ << ":" << I.timeEnd_ << "]s\n" 
-		<< "Actual Time Step: " << I.timeActual_ << "s" << std::endl;
+	out << "Time vector: [" << I.time_->getTimeStart() << ":" << I.time_->getDt() << ":" << I.time_->getTimeEnd() << "]s\n"
+		<< "Actual Time Step: " << I.time_->getTimeActual() << "s" << std::endl;
 	out << "DOFs Time Evolution: \n" << I.dofTimeHistory_ << std::endl;
 	return out;
 };

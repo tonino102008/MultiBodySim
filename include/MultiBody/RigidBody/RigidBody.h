@@ -10,8 +10,7 @@ public:
 
 	RigidBody(const Eigen::Matrix3d& m, const Eigen::Matrix3d& J,
 		const Eigen::Vector3d& xG0, const Quaternion& q0,
-		const Eigen::Vector3d& xGp0, const Quaternion& qp0,
-		const Eigen::Vector3d& fExt, const Eigen::Vector3d& mExt);
+		const Eigen::Vector3d& xGp0, const Quaternion& qp0);
 
 	void updateXG(const Eigen::Vector3d xG);
 
@@ -28,6 +27,9 @@ public:
 	void updateMass();
 
 	void updateF();
+
+	void updateBody(const Eigen::VectorXd& dof, 
+		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k);
 
 	Eigen::MatrixXd getG() const;
 
@@ -72,10 +74,6 @@ private:
 	Eigen::VectorXd f_;
 
 	Eigen::Vector3d fG_;
-
-	Eigen::Vector3d fExt_;
-
-	Eigen::Vector3d mExt_;
 
 };
 

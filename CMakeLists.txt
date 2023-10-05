@@ -22,7 +22,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(LIBS Quaternions)
+set(LIBS Quaternions TimeSim)
 set(LIBS_DIR lib)
 
 find_package(Eigen3 3.4 REQUIRED NO_MODULE)
@@ -36,8 +36,9 @@ if (UNIX)
 endif (UNIX)
 
 foreach(LIBRARY ${LIBS})
-    include_directories("${LIBS_DIR}/${LIBS}/include")
+    include_directories("${LIBS_DIR}/${LIBRARY}/include")
 endforeach(LIBRARY)
+
 include_directories(include)
 
 add_subdirectory(lib)

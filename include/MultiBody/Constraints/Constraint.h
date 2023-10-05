@@ -21,7 +21,8 @@ public:
 
 	double getB() const;
 
-	virtual void updateConstraint(const Eigen::VectorXd& dof) = 0;
+	virtual void updateConstraint(const Eigen::VectorXd& dof,
+		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k) = 0;
 
 protected:
 

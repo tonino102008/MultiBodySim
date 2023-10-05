@@ -9,15 +9,17 @@ public:
 
 	EulerForward(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual,
-		std::vector<std::reference_wrapper<RigidBody>> body,
-		std::vector<std::reference_wrapper<Constraint>> constraint,
-		std::vector<std::reference_wrapper<External>> external);
+		const int nBody, const int nConstr, const int nExt);
 
 	void solve();
 
 	void print() const;
 
 	void printToFile() const;
+
+private:
+
+	void solve0();
 
 };
 
