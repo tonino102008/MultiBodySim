@@ -13,4 +13,4 @@ set(SOURCES MultiBodySim.cpp)
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_executable (MultiBodySim ${SOURCES})
 
-target_link_libraries(MultiBodySim EulerForward Eigen3::Eigen)
+target_link_libraries(MultiBodySim MultiBody Eigen3::Eigen)

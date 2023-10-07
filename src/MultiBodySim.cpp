@@ -34,27 +34,29 @@ int main()
 	// 
 	// MULTIBODY
 
-	EulerForward I(0.0, 10.0, 0.001, 0.0, 2, 1, 1);
+	MultiBody MB(0.0, 10.0, 0.001, 0.0, 2, 1, 1);
 
-	I.setBody(RigidBody(m0, J0, xG0, q0, xGp0, qp0), 0);
-	I.setBody(RigidBody(m1, J1, xG1, q1, xGp1, qp1), 1);
+	MB.setBody(RigidBody(m0, J0, xG0, q0, xGp0, qp0), 0);
+	MB.setBody(RigidBody(m1, J1, xG1, q1, xGp1, qp1), 1);
 
-	I.setConstr(EqualityC(7, 22), 0);
+	MB.setConstr(EqualityC(7, 22), 0);
 
-	I.setExt(Spring(8, 23, 10.0, 0.0), 0);
+	MB.setExt(Spring(8, 23, 10.0, 0.0), 0);
+
+	MB.setIntegr(EulerForward());
 
 	// END - MULTIBODY
 	//
 	// SOLVE EOMs
 
 	auto start = std::chrono::high_resolution_clock::now();
-	I.solve();
+	MB.solve();
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
 	std::cout << "Time taken by function: " << duration.count() / 1000.0 << " seconds" << std::endl;
 
-	I.printToFile();
+	MB.printToFile();
 
 	// END - SOLVE EOMs
 

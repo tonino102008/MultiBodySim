@@ -2,9 +2,11 @@
 # qui la logica specifica del progetto.
 #
 
-set(EULERFORWARD_SOURCES EulerForward.cpp)
+set(INTEGRATOR_SOURCES Integrator.cpp)
+
+add_subdirectory(EulerForward)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
-add_library(EulerForward ${EULERFORWARD_SOURCES})
+add_library(Integrator ${INTEGRATOR_SOURCES})
 
-target_link_libraries(EulerForward MultiBody Eigen3::Eigen)
+target_link_libraries(Integrator EulerForward Eigen3::Eigen)

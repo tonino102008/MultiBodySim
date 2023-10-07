@@ -4,6 +4,7 @@
 #include "RigidBody/RigidBody.h"
 #include "Constraints/Constraint.h"
 #include "External/External.h"
+#include "Integrator/Integrator.h"
 #include "TimeSim.h"
 
 #include <Eigen/Dense>
@@ -29,16 +30,22 @@ public:
 	void setBody(const RigidBody& body, const int i);
 
 	template <typename T> void setConstr(const T& constr, const int i) {
-		this->constraint_[i] = std::make_unique<T>(constr);
+		this->constraint_[i] = std::make_shared<T>(constr);
 	};
 
 	template <typename T> void setExt(const T& ext, const int i) {
-		this->external_[i] = std::make_unique<T>(ext);
+		this->external_[i] = std::make_shared<T>(ext);
 	};
 
-	friend std::ostream& operator<<(std::ostream& out, const MultiBody& I);
+	template <typename T> void setIntegr(const T& integr) {
+		this->integrator_ = std::make_unique<T>(integr);
+	};
 
-	virtual void solve() = 0;
+	void solve();
+
+	void printToFile() const;
+
+	friend std::ostream& operator<<(std::ostream& out, const MultiBody& I);
 
 protected:
 
@@ -50,21 +57,19 @@ protected:
 
 	std::unique_ptr<TimeSim> time_;
 
-	std::vector<std::unique_ptr<RigidBody>> body_;
+	std::vector<std::shared_ptr<RigidBody>> body_;
 
-	std::vector<std::unique_ptr<Constraint>> constraint_;
+	std::vector<std::shared_ptr<Constraint>> constraint_;
 
-	std::vector<std::unique_ptr<External>> external_;
+	std::vector<std::shared_ptr<External>> external_;
+
+	std::unique_ptr<Integrator> integrator_;
 
 	const int nBody_;
 
 	const int nConstr_;
 
 	const int nExt_ ;
-
-private:
-
-	virtual void solve0() = 0;
 	
 };
 
