@@ -13,21 +13,21 @@ public:
 
 	void solve(Eigen::MatrixXd& dofTot,
 		Eigen::MatrixXd& M, Eigen::VectorXd& f, 
-		std::vector<std::shared_ptr<RigidBody>> body,
-		std::vector<std::shared_ptr<Constraint>> constraint,
-		std::vector<std::shared_ptr<External>> external,
+		std::vector<std::unique_ptr<RigidBody>>& body,
+		std::vector<std::unique_ptr<Constraint>>& constraint,
+		std::vector<std::unique_ptr<External>>& external,
 		std::unique_ptr<TimeSim>& time);
 
-	void print(std::vector<std::shared_ptr<RigidBody>> body,
+	void print(std::vector<std::unique_ptr<RigidBody>>& body,
 		std::unique_ptr<TimeSim>& time) const;
 
 private:
 
 	void solve0(Eigen::MatrixXd& dofTot,
 		Eigen::MatrixXd& M, Eigen::VectorXd& f,
-		std::vector<std::shared_ptr<RigidBody>> body,
-		std::vector<std::shared_ptr<Constraint>> constraint,
-		std::vector<std::shared_ptr<External>> external);
+		std::vector<std::unique_ptr<RigidBody>>& body,
+		std::vector<std::unique_ptr<Constraint>>& constraint,
+		std::vector<std::unique_ptr<External>>& external);
 
 };
 

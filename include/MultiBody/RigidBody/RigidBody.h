@@ -49,6 +49,8 @@ public:
 
 	Eigen::VectorXd getWLocal() const;
 
+	Quaternion getQuaternion() const;
+
 private:
 
 	Eigen::Vector3d xG_; // State translation vector [xG,yG,zG]

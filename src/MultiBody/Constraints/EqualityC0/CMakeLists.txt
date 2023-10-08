@@ -2,9 +2,9 @@
 # qui la logica specifica del progetto.
 #
 
-set(SPRING_SOURCES Spring.cpp)
+set(EQUALITYC0_SOURCES EqualityC0.cpp)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
-add_library(Spring ${SPRING_SOURCES})
+add_library(EqualityC0 ${EQUALITYC0_SOURCES})
 
-target_link_libraries(Spring RigidBody Eigen3::Eigen)
+target_link_libraries(EqualityC0 Eigen3::Eigen)

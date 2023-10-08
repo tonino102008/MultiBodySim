@@ -27,7 +27,7 @@ Eigen::VectorXd MultiBody::getF() const {
 };
 
 void MultiBody::setBody(const RigidBody& body, const int i) {
-	this->body_[i] = std::make_shared<RigidBody>(body);
+	this->body_[i] = std::make_unique<RigidBody>(body);
 };
 
 void MultiBody::solve() {

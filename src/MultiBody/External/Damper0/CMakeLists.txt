@@ -2,9 +2,9 @@
 # qui la logica specifica del progetto.
 #
 
-set(SPRING_SOURCES Spring.cpp)
+set(DAMPER0_SOURCES Damper0.cpp)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
-add_library(Spring ${SPRING_SOURCES})
+add_library(Damper0 ${DAMPER0_SOURCES})
 
-target_link_libraries(Spring RigidBody Eigen3::Eigen)
+target_link_libraries(Damper0 RigidBody Eigen3::Eigen)

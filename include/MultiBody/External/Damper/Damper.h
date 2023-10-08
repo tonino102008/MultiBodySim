@@ -9,16 +9,20 @@ class Damper : public External {
 
 public:
 
-	Damper(const int dof1, const double r);
+	Damper(const int dof1, const int dof2, const double r,
+		const Eigen::Vector3d& pos1, const Eigen::Vector3d& pos2, const Eigen::Vector3d& axis);
 
-	Damper(const int dof1, const int dof2, const double r);
-
-	void updateExternal(const Eigen::VectorXd& dof, Eigen::VectorXd& f);
+	void updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f);
 
 private:
 
 	const double r_;
 
+	const Eigen::Vector3d pos1_;
+
+	const Eigen::Vector3d pos2_;
+
+	const Eigen::Vector3d& axis_;
 };
 
 #endif // MULTIBODYSIM_INCLUDE_MULTIBODY_EXTERNAL_DAMPER_DAMPER_H_

@@ -9,17 +9,22 @@ class Spring : public External {
 
 public:
 
-	Spring(const int dof1, const double k, const double x0);
+	Spring(const int body1, const int body2, const double k, const double x0,
+		const Eigen::Vector3d& pos1, const Eigen::Vector3d& pos2, const Eigen::Vector3d& axis);
 
-	Spring(const int dof1, const int dof2, const double k, const double x0);
-
-	void updateExternal(const Eigen::VectorXd& dof, Eigen::VectorXd& f);
+	void updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f);
 
 private:
 
 	const double k_;
 
 	const double x0_;
+
+	const Eigen::Vector3d pos1_;
+
+	const Eigen::Vector3d pos2_;
+
+	const Eigen::Vector3d axis_;
 
 };
 

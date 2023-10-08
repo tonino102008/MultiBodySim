@@ -3,8 +3,10 @@
 
 #include "Quaternion.h"
 #include "MultiBody/Constraints/EqualityC/EqualityC.h"
+#include "MultiBody/Constraints/EqualityC0/EqualityC0.h"
 #include "MultiBody/Integrator/EulerForward/EulerForward.h"
 #include "MultiBody/External/Spring/Spring.h"
+#include "MultiBody/External/Spring0/Spring0.h"
 #include "MultiBody/MultiBody.h"
 
 #endif // MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_

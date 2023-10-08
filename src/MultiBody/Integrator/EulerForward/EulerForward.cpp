@@ -7,9 +7,9 @@ EulerForward::EulerForward()
 
 void EulerForward::solve0(Eigen::MatrixXd& dofTot,
 	Eigen::MatrixXd& M, Eigen::VectorXd& f, 
-	std::vector<std::shared_ptr<RigidBody>> body,
-	std::vector<std::shared_ptr<Constraint>> constraint,
-	std::vector<std::shared_ptr<External>> external) {
+	std::vector<std::unique_ptr<RigidBody>>& body,
+	std::vector<std::unique_ptr<Constraint>>& constraint,
+	std::vector<std::unique_ptr<External>>& external) {
 
 	for (int j = 0; j < body.size(); j++) {
 		int k = j * kDof;
@@ -24,7 +24,7 @@ void EulerForward::solve0(Eigen::MatrixXd& dofTot,
 		//std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
 	}
 	for (int j = 0; j < external.size(); j++) {
-		external[j]->updateExternal(dofTot.col(0), f);
+		external[j]->updateExternal(body, f);
 		//std::cout << "Ext: " << this->external_[j].get().getExt() << std::endl;
 	}
 
@@ -32,9 +32,9 @@ void EulerForward::solve0(Eigen::MatrixXd& dofTot,
 
 void EulerForward::solve(Eigen::MatrixXd& dofTot,
 	Eigen::MatrixXd& M, Eigen::VectorXd& f,
-	std::vector<std::shared_ptr<RigidBody>> body,
-	std::vector<std::shared_ptr<Constraint>> constraint,
-	std::vector<std::shared_ptr<External>> external,
+	std::vector<std::unique_ptr<RigidBody>>& body,
+	std::vector<std::unique_ptr<Constraint>>& constraint,
+	std::vector<std::unique_ptr<External>>& external,
 	std::unique_ptr<TimeSim>& time) {
 
 	this->solve0(dofTot, M, f, body, constraint, external);
@@ -55,14 +55,14 @@ void EulerForward::solve(Eigen::MatrixXd& dofTot,
 			//std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
 		}
 		for (int j = 0; j < external.size(); j++) {
-			external[j]->updateExternal(dof, f);
+			external[j]->updateExternal(body, f);
 			//std::cout << "Ext: " << this->external_[j].get().getExt() << std::endl;
 		}
 	}
 
 };
 
-void EulerForward::print(std::vector<std::shared_ptr<RigidBody>> body,
+void EulerForward::print(std::vector<std::unique_ptr<RigidBody>>& body,
 	std::unique_ptr<TimeSim>& time) const {
 
 	std::cout << "Actual Time Step: " << time->getTimeActual() << "s" << std::endl;

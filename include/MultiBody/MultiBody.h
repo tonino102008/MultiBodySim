@@ -30,11 +30,11 @@ public:
 	void setBody(const RigidBody& body, const int i);
 
 	template <typename T> void setConstr(const T& constr, const int i) {
-		this->constraint_[i] = std::make_shared<T>(constr);
+		this->constraint_[i] = std::make_unique<T>(constr);
 	};
 
 	template <typename T> void setExt(const T& ext, const int i) {
-		this->external_[i] = std::make_shared<T>(ext);
+		this->external_[i] = std::make_unique<T>(ext);
 	};
 
 	template <typename T> void setIntegr(const T& integr) {
@@ -47,7 +47,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& out, const MultiBody& I);
 
-protected:
+private:
 
 	Eigen::MatrixXd dofTimeHistory_;
 
@@ -57,11 +57,11 @@ protected:
 
 	std::unique_ptr<TimeSim> time_;
 
-	std::vector<std::shared_ptr<RigidBody>> body_;
+	std::vector<std::unique_ptr<RigidBody>> body_;
 
-	std::vector<std::shared_ptr<Constraint>> constraint_;
+	std::vector<std::unique_ptr<Constraint>> constraint_;
 
-	std::vector<std::shared_ptr<External>> external_;
+	std::vector<std::unique_ptr<External>> external_;
 
 	std::unique_ptr<Integrator> integrator_;
 

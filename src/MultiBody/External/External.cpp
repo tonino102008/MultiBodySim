@@ -1,19 +1,19 @@
 #include "MultiBody/External/External.h"
 
-External::External(const int dof1) :
-	dof1_(dof1), dof2_(-1.0), ext_(0.0)
+External::External(const int body1) :
+	body1_(body1), body2_(-1.0), ext_(0.0)
 {};
 
-External::External(const int dof1, const int dof2) :
-	dof1_(dof1), dof2_(dof2), ext_(0.0)
+External::External(const int body1, const int body2) :
+	body1_(body1), body2_(body2), ext_(0.0)
 {};
 
 int External::getDof1() const {
-	return this->dof1_;
+	return this->body1_;
 };
 
 int External::getDof2() const {
-	return this->dof2_;
+	return this->body2_;
 };
 
 double External::getExt() const {

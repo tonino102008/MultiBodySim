@@ -7,4 +7,4 @@ set(DAMPER_SOURCES Damper.cpp)
 # Aggiungere l'origine all'eseguibile di questo progetto.
 add_library(Damper ${DAMPER_SOURCES})
 
-target_link_libraries(Damper Eigen3::Eigen)
+target_link_libraries(Damper RigidBody Eigen3::Eigen)

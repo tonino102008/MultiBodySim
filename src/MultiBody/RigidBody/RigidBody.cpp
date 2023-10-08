@@ -171,3 +171,7 @@ Eigen::VectorXd RigidBody::getWGlobal() const {
 Eigen::VectorXd RigidBody::getWLocal() const {
 	return (this->q_.conj() * this->qp_).getQuaternion() * 2.0;
 };
+
+Quaternion RigidBody::getQuaternion() const {
+	return this->q_;
+};
