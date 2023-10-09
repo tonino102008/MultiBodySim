@@ -55,3 +55,13 @@ Quaternion Quaternion::conj() const {
 double Quaternion::norm() const {
 	return sqrt(this->scalar_ * this->scalar_ + this->vector_.dot(this->vector_));
 };
+
+Eigen::Vector3d Quaternion::rotateVecG(const Eigen::Vector3d& m) const {
+	Eigen::Vector3d out = (*(this) * Quaternion(0.0, m) * this->conj()).getVector();
+	return out;
+};
+
+Eigen::Vector3d Quaternion::rotateVecL(const Eigen::Vector3d& m) const {
+	Eigen::Vector3d out = (this->conj() * Quaternion(0.0, m) * (*this)).getVector();
+	return out;
+};

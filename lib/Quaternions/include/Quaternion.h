@@ -36,6 +36,10 @@ public:
 
 	double norm() const;
 
+	Eigen::Vector3d rotateVecG(const Eigen::Vector3d& m) const;
+
+	Eigen::Vector3d rotateVecL(const Eigen::Vector3d& m) const;
+
 private:
 
 	double scalar_;

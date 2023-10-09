@@ -45,9 +45,9 @@ public:
 
 	Eigen::VectorXd getF() const;
 
-	Eigen::VectorXd getWGlobal() const;
+	Eigen::Vector3d getWGlobal() const;
 
-	Eigen::VectorXd getWLocal() const;
+	Eigen::Vector3d getWLocal() const;
 
 	Quaternion getQuaternion() const;
 

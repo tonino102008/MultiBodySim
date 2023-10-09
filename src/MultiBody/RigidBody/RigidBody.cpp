@@ -164,12 +164,12 @@ Eigen::VectorXd RigidBody::getF() const {
 	return this->f_;
 };
 
-Eigen::VectorXd RigidBody::getWGlobal() const {
-	return (this->qp_ * this->q_.conj()).getQuaternion() * 2.0;
+Eigen::Vector3d RigidBody::getWGlobal() const {
+	return ((this->qp_ * this->q_.conj()).getQuaternion() * 2.0).segment<3>(1);
 };
 
-Eigen::VectorXd RigidBody::getWLocal() const {
-	return (this->q_.conj() * this->qp_).getQuaternion() * 2.0;
+Eigen::Vector3d RigidBody::getWLocal() const {
+	return ((this->q_.conj() * this->qp_).getQuaternion() * 2.0).segment<3>(1);
 };
 
 Quaternion RigidBody::getQuaternion() const {

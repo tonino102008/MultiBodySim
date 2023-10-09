@@ -7,22 +7,18 @@ Spring::Spring(const int body1, const int body2, const double k, const double x0
 
 void Spring::updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f) {
 
-	Eigen::Vector3d pos1G = body[this->body1_]->getDof().segment<3>(7) +
-		(body[this->body1_]->getQuaternion() * Quaternion(0.0, this->pos1_) * body[this->body1_]->getQuaternion().conj()).getVector();
+	Eigen::Vector3d pos1G = body[this->body1_]->getDof().segment<3>(7) + body[this->body1_]->getQuaternion().rotateVecG(this->pos1_);
 
-	Eigen::Vector3d pos2G = body[this->body2_]->getDof().segment<3>(7) +
-		(body[this->body2_]->getQuaternion() * Quaternion(0.0, this->pos2_) * body[this->body2_]->getQuaternion().conj()).getVector();
+	Eigen::Vector3d pos2G = body[this->body2_]->getDof().segment<3>(7) + body[this->body2_]->getQuaternion().rotateVecG(this->pos2_);
 
 	this->ext_ = this->k_ * (this->x0_ + pos2G.dot(this->axis_) - pos1G.dot(this->axis_));
 
 	f.segment<3>(this->body1_ * kDof) += this->ext_ * this->axis_;
 	f.segment<4>(this->body1_ * kDof + 3) += 
-		2.0 * body[this->body1_]->getG().transpose() * this->pos1_.cross(
-			(body[this->body1_]->getQuaternion().conj() * Quaternion(0.0, this->ext_ * this->axis_) * body[this->body1_]->getQuaternion()).getVector());
+		2.0 * body[this->body1_]->getG().transpose() * body[this->body1_]->getQuaternion().rotateVecL(this->pos1_).cross(body[this->body1_]->getQuaternion().rotateVecL(this->ext_ * this->axis_));
 
 	f.segment<3>(this->body2_ * kDof) -= this->ext_ * this->axis_;
 	f.segment<4>(this->body2_ * kDof + 3) -=
-		2.0 * body[this->body2_]->getG().transpose() * this->pos2_.cross(
-			(body[this->body2_]->getQuaternion().conj() * Quaternion(0.0, this->ext_ * this->axis_) * body[this->body2_]->getQuaternion()).getVector());
+		2.0 * body[this->body2_]->getG().transpose() * body[this->body2_]->getQuaternion().rotateVecL(this->pos2_).cross(body[this->body2_]->getQuaternion().rotateVecL(this->ext_ * this->axis_));
 
 };

@@ -7,6 +7,8 @@
 #include "MultiBody/Integrator/EulerForward/EulerForward.h"
 #include "MultiBody/External/Spring/Spring.h"
 #include "MultiBody/External/Spring0/Spring0.h"
+#include "MultiBody/External/Damper/Damper.h"
+#include "MultiBody/External/Damper0/Damper0.h"
 #include "MultiBody/MultiBody.h"
 
 #endif // MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_
