@@ -12,9 +12,17 @@ public:
 	Spring0(const int body1, const double k, const double x0,
 		const Eigen::Vector3d& pos1, const Eigen::Vector3d& axis);
 
+	Eigen::VectorXi getBodyIndex() const;
+
+	double getExt() const;
+
 	void updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f);
 
 private:
+
+	const int body1_;
+
+	double ext_;
 
 	const double k_;
 

@@ -2,8 +2,16 @@
 
 Damper0::Damper0(const int body1, const double r,
 	const Eigen::Vector3d& pos1, const Eigen::Vector3d& axis) :
-	External(body1), r_(r), pos1_(pos1), axis_(axis)
+	body1_(body1), r_(r), pos1_(pos1), axis_(axis), ext_(0.0)
 {};
+
+Eigen::VectorXi Damper0::getBodyIndex() const {
+	return Eigen::VectorXi(this->body1_);
+};
+
+double Damper0::getExt() const {
+	return this->ext_;
+};
 
 void Damper0::updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f) {
 	

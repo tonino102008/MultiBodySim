@@ -9,25 +9,13 @@ class External {
 
 public:
 
-	External(const int body1);
+	External();
 
-	External(const int body1, const int body2);
+	virtual Eigen::VectorXi getBodyIndex() const = 0;
 
-	int getDof1() const;
-
-	int getDof2() const;
-
-	double getExt() const;
+	virtual double getExt() const = 0;
 
 	virtual void updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f) = 0;
-
-protected:
-
-	const int body1_;
-
-	const int body2_;
-
-	double ext_;
 
 };
 

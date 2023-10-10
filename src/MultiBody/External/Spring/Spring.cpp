@@ -2,8 +2,16 @@
 
 Spring::Spring(const int body1, const int body2, const double k, const double x0,
 	const Eigen::Vector3d& pos1, const Eigen::Vector3d& pos2, const Eigen::Vector3d& axis) :
-	External(body1, body2), k_(k), x0_(x0), pos1_(pos1), pos2_(pos2), axis_(axis)
+	body1_(body1), body2_(body2), k_(k), x0_(x0), pos1_(pos1), pos2_(pos2), axis_(axis), ext_(0.0)
 {};
+
+Eigen::VectorXi Spring::getBodyIndex() const {
+	return Eigen::VectorXi(this->body1_, this->body2_);
+};
+
+double Spring::getExt() const {
+	return this->ext_;
+};
 
 void Spring::updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f) {
 
