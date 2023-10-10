@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   Spring.h
+ * \brief  
+ * 
+ * \author Antonio Cioffi
+ * \date   October 2023
+ *********************************************************************/
+
 #ifndef MULTIBODYSIM_INCLUDE_MULTIBODY_EXTERNAL_SPRING_SPRING_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_EXTERNAL_SPRING_SPRING_H_
 

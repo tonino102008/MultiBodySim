@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   EqualityC0.h
+ * \brief  
+ * 
+ * \author Antonio Cioffi
+ * \date   October 2023
+ *********************************************************************/
+
 #ifndef MULTIBODYSIM_INCLUDE_MULTIBODY_CONSTRAINTS_EQUALITYC0_EQUALITYC0_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_CONSTRAINTS_EQUALITYC0_EQUALITYC0_H_
 

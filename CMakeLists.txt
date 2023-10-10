@@ -13,6 +13,7 @@ endif()
 project ("MultiBodySim")
 
 option(BUILD_TESTS "Build test programs" OFF)
+option(BUILD_DOCS "Build documentation" ON)
 
 # C++17 Standard
 set(CMAKE_CXX_STANDARD 17)
@@ -48,3 +49,11 @@ if(BUILD_TESTS)
 	enable_testing()
 	add_subdirectory(tests)
 endif(BUILD_TESTS)
+
+if(BUILD_DOCS)
+	find_package(Doxygen)
+	if(NOT DOXYGEN_FOUND)
+			message(FATAL_ERROR "Doxygen is needed to build the documentation.")
+	endif()
+	add_subdirectory(doc)
+endif(BUILD_DOCS)

@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   RigidBodyConst.h
+ * \brief  
+ * 
+ * \author Antonio Cioffi
+ * \date   October 2023
+ *********************************************************************/
+
 #ifndef MULTIBODYSIM_INCLUDE_MULTIBODY_RIGIDBODY_RIGIDBODYCONST_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_RIGIDBODY_RIGIDBODYCONST_H_
 

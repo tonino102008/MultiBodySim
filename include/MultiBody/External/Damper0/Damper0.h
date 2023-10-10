@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   Damper0.h
+ * \brief  
+ * 
+ * \author Antonio Cioffi
+ * \date   October 2023
+ *********************************************************************/
+
 #ifndef MULTIBODYSIM_INCLUDE_MULTIBODY_EXTERNAL_DAMPER0_DAMPER0_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_EXTERNAL_DAMPER0_DAMPER0_H_
 

@@ -1,4 +1,12 @@
-﻿#ifndef MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_
+﻿/*****************************************************************//**
+ * \file   MultiBodySim.h
+ * \brief  
+ * 
+ * \author Antonio Cioffi
+ * \date   October 2023
+ *********************************************************************/
+
+#ifndef MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODYSIM_H_
 
 #include "Quaternion.h"

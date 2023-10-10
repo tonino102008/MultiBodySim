@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   Quaternion.h
+ * \brief  
+ * 
+ * \author Antonio Cioffi
+ * \date   October 2023
+ *********************************************************************/
+
 #ifndef MULTIBODYSIM_LIB_QUATERNIONS_QUATERNION_H_
 #define MULTIBODYSIM_LIB_QUATERNIONS_QUATERNION_H_
 
