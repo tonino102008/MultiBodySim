@@ -22,10 +22,11 @@ public:
 	 * @param body1 
 	 * @param r 
 	 * @param pos1 
+	 * @param pos2 
 	 * @param axis 
 	*/
-	Damper0(const int body1, const double r,
-		const Eigen::Vector3d& pos1, const Eigen::Vector3d& axis);
+	Damper0(const int body1, const double r, const Eigen::Vector3d& pos1,
+		const Eigen::Vector3d& pos2, const Eigen::Vector3d& axis);
 
 	/**
 	 * @brief 
@@ -55,6 +56,8 @@ private:
 	const double r_;
 
 	const Eigen::Vector3d& pos1_;
+
+	const Eigen::Vector3d& pos2_;
 	
 	const Eigen::Vector3d& axis_;
 

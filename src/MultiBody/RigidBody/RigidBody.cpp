@@ -70,8 +70,8 @@ void RigidBody::updateF() {
 	Eigen::MatrixXd G = this->getG();
 	Eigen::MatrixXd Gp = this->getGp();
 	Eigen::VectorXd qp = this->qp_.getQuaternion();
-	this->f_.segment<3>(0) = this->fG_; // Gravity Force
-	this->f_.segment<4>(3) = -8.0 * Gp.transpose() * this->J_ * G * qp;// +2.0 * G.transpose() * this->mExt_; External Momenta
+	this->f_.segment<3>(0) = this->fG_;
+	this->f_.segment<4>(3) = -8.0 * Gp.transpose() * this->J_ * G * qp;
 	this->f_.coeffRef(3) += 4.0 * qp.transpose() * kDGDqs.transpose() * this->J_ * G * qp;
 	this->f_.coeffRef(4) += 4.0 * qp.transpose() * kDGDqx.transpose() * this->J_ * G * qp;
 	this->f_.coeffRef(5) += 4.0 * qp.transpose() * kDGDqy.transpose() * this->J_ * G * qp;

@@ -23,10 +23,11 @@ public:
 	 * @param k 
 	 * @param x0 
 	 * @param pos1 
+	 * @param pos2 
 	 * @param axis 
 	*/
-	Spring0(const int body1, const double k, const double x0,
-		const Eigen::Vector3d& pos1, const Eigen::Vector3d& axis);
+	Spring0(const int body1, const double k, const double x0, const Eigen::Vector3d& pos1,
+		const Eigen::Vector3d& pos2, const Eigen::Vector3d& axis);
 
 	/**
 	 * @brief 
@@ -58,6 +59,8 @@ private:
 	const double x0_;
 
 	const Eigen::Vector3d& pos1_;
+
+	const Eigen::Vector3d& pos2_;
 	
 	const Eigen::Vector3d& axis_;
 

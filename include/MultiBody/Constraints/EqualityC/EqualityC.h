@@ -18,28 +18,69 @@ public:
 
 	/**
 	 * @brief 
-	 * @param dof1 
+	 * @param body1 
+	 * @param body2 
+	 * @param pos1 
+	 * @param pos2 
+	 * @param axis 
 	*/
-	EqualityC(const int dof1);
+	EqualityC(const int body1, const int body2,
+		const Eigen::Vector3d& pos1, const Eigen::Vector3d& pos2,
+		const Eigen::Vector3d& axis);
+
+	/**
+	 * @brief
+	 * @return
+	*/
+	Eigen::VectorXi getBodyIndex() const;
+
+	/**
+	 * @brief
+	 * @return
+	*/
+	double getG() const;
+
+	/**
+	 * @brief
+	 * @return
+	*/
+	double getB() const;
+
+	/**
+	 * @brief
+	 * @return
+	*/
+	Eigen::VectorXd getDGDDof() const;
 
 	/**
 	 * @brief 
-	 * @param dof1 
-	 * @param dof2 
-	*/
-	EqualityC(const int dof1, const int dof2);
-
-	/**
-	 * @brief 
-	 * @param dof 
+	 * @param body 
 	 * @param M 
 	 * @param f 
-	 * @param k 
+	 * @param j 
 	*/
-	void updateConstraint(const Eigen::VectorXd& dof,
-		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k);
+	void updateConstraint(const std::vector<std::unique_ptr<RigidBody>>& body,
+		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int j);
 
 private:
+
+	const int body1_;
+
+	const int body2_;
+
+	double G_;
+
+	Eigen::VectorXd dGddof_;
+
+	double b_; // The variable b_ represents: dGddofdt_ * dofp_
+
+	const Eigen::Vector3d pos1_;
+
+	const Eigen::Vector3d pos2_;
+
+	const Eigen::Vector3d axis_;
+
+	int idx_;
 
 };
 

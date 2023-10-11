@@ -9,8 +9,8 @@ MultiBody::MultiBody(const double timeStart, const double timeEnd,
 	body_(nBody), constraint_(nConstr), external_(nExt), integrator_(),
 	dofTimeHistory_(Eigen::MatrixXd::Zero(kDof * nBody + nConstr,
 		static_cast<int>((timeEnd - timeStart) / dt + 1))),
-	M_(Eigen::MatrixXd::Zero(kDof* nBody + nConstr,	kDof* nBody + nConstr)),
-	f_(Eigen::VectorXd::Zero(kDof* nBody + nConstr)),
+	M_(Eigen::MatrixXd::Zero(kDof * nBody + nConstr, kDof * nBody + nConstr)),
+	f_(Eigen::VectorXd::Zero(kDof * nBody + nConstr)),
 	nBody_(nBody), nConstr_(nConstr), nExt_(nExt)
 {};
 

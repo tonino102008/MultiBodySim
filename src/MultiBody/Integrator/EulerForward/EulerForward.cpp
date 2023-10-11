@@ -19,8 +19,7 @@ void EulerForward::solve0(Eigen::MatrixXd& dofTot,
 		//this->print();
 	}
 	for (int j = 0; j < constraint.size(); j++) {
-		int k = j + body.size() * kDof;
-		constraint[j]->updateConstraint(dofTot.col(0), M, f, k);
+		constraint[j]->updateConstraint(body, M, f, j);
 		//std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
 	}
 	for (int j = 0; j < external.size(); j++) {
@@ -41,17 +40,14 @@ void EulerForward::solve(Eigen::MatrixXd& dofTot,
 
 	for (int i = 0; i < time->getNSteps(); i++) {
 		time->step();
-		Eigen::VectorXd dofp = M.lu().solve(f);
-		Eigen::VectorXd dof = dofTot.col(i) + dofp * time->getDt();
-		dofTot.col(i + 1) = dof;
+		dofTot.col(i + 1) = dofTot.col(i) + M.lu().solve(f) * time->getDt();;
 		for (int j = 0; j < body.size(); j++) {
 			int k = j * kDof;
-			body[j]->updateBody(dof, M, f, k);
+			body[j]->updateBody(dofTot.col(i + 1), M, f, k);
 			//this->print();
 		}
 		for (int j = 0; j < constraint.size(); j++) {
-			int k = j + body.size() * kDof;
-			constraint[j]->updateConstraint(dof, M, f, k);
+			constraint[j]->updateConstraint(body, M, f, j);
 			//std::cout << "G: " << this->constraint_[j].get().getG() << std::endl;
 		}
 		for (int j = 0; j < external.size(); j++) {

@@ -9,6 +9,8 @@
 #ifndef MULTIBODYSIM_INCLUDE_MULTIBODY_CONSTRAINTS_CONSTRAINT_H_
 #define MULTIBODYSIM_INCLUDE_MULTIBODY_CONSTRAINTS_CONSTRAINT_H_
 
+#include "MultiBody/RigidBody/RigidBody.h"
+
 #include <Eigen/Dense>
 
 class Constraint {
@@ -17,68 +19,42 @@ public:
 
 	/**
 	 * @brief 
-	 * @param dof1 
 	*/
-	Constraint(const int dof1);
-
+	Constraint();
+	
 	/**
 	 * @brief 
-	 * @param dof1 
-	 * @param dof2 
+	 * @return 
 	*/
-	Constraint(const int dof1, const int dof2);
+	virtual Eigen::VectorXi getBodyIndex() const = 0;
+
+	/**
+	 * @brief
+	 * @return
+	*/
+	virtual double getG() const = 0;
+
+	/**
+	 * @brief
+	 * @return
+	*/
+	virtual double getB() const = 0;
 
 	/**
 	 * @brief 
 	 * @return 
 	*/
-	int getDof1() const;
+	virtual Eigen::VectorXd getDGDDof() const = 0;
 
 	/**
 	 * @brief 
-	 * @return 
-	*/
-	int getDof2() const;
-
-	/**
-	 * @brief 
-	 * @return 
-	*/
-	double getG() const;
-
-	/**
-	 * @brief 
-	 * @return 
-	*/
-	Eigen::VectorXd getDGDDof() const;
-
-	/**
-	 * @brief 
-	 * @return 
-	*/
-	double getB() const;
-
-	/**
-	 * @brief 
-	 * @param dof 
+	 * @param body 
 	 * @param M 
 	 * @param f 
-	 * @param k 
+	 * @param j 
 	*/
-	virtual void updateConstraint(const Eigen::VectorXd& dof,
-		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k) = 0;
-
-protected:
-
-	const int dof1_; // TODO: has to become a vector when rotational constraints will be added
-
-	const int dof2_; // TODO: has to become a vector when rotational constraints will be added
-
-	double G_;
-
-	Eigen::VectorXd dGddof_;
-
-	double b_; // The variable b_ represents: dGddofdt_ * dofp_
+	virtual void updateConstraint(const std::vector<std::unique_ptr<RigidBody>>& body,
+		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int j) = 0;
 
 };
 
