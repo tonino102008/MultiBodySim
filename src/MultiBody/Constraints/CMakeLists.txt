@@ -2,12 +2,10 @@
 # qui la logica specifica del progetto.
 #
 
-set(CONSTRAINTS_SOURCES Constraint.cpp)
-
 add_subdirectory(EqualityC)
 add_subdirectory(EqualityC0)
 
 # Aggiungere l'origine all'eseguibile di questo progetto.
-add_library(Constraints ${CONSTRAINTS_SOURCES})
+add_library(Constraints INTERFACE)
 
-target_link_libraries(Constraints EqualityC EqualityC0 Eigen3::Eigen)
+target_link_libraries(Constraints INTERFACE EqualityC EqualityC0 Eigen3::Eigen)

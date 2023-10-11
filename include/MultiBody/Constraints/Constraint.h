@@ -12,15 +12,11 @@
 #include "MultiBody/RigidBody/RigidBody.h"
 
 #include <Eigen/Dense>
+#include <memory>
 
 class Constraint {
 
 public:
-
-	/**
-	 * @brief 
-	*/
-	Constraint();
 	
 	/**
 	 * @brief 

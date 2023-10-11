@@ -23,11 +23,6 @@ public:
 
 	/**
 	 * @brief 
-	*/
-	Integrator();
-
-	/**
-	 * @brief 
 	 * @param dofTot 
 	 * @param M 
 	 * @param f 
