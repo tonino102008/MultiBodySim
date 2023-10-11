@@ -17,13 +17,34 @@ class Spring0 : public External {
 
 public:
 
+	/**
+	 * @brief 
+	 * @param body1 
+	 * @param k 
+	 * @param x0 
+	 * @param pos1 
+	 * @param axis 
+	*/
 	Spring0(const int body1, const double k, const double x0,
 		const Eigen::Vector3d& pos1, const Eigen::Vector3d& axis);
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::VectorXi getBodyIndex() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getExt() const;
 
+	/**
+	 * @brief 
+	 * @param body 
+	 * @param f 
+	*/
 	void updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f);
 
 private:

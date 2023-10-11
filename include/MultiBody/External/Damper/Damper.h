@@ -17,13 +17,35 @@ class Damper : public External {
 
 public:
 
+	/**
+	 * @brief 
+	 * @param body1 
+	 * @param body2 
+	 * @param r 
+	 * @param pos1 
+	 * @param pos2 
+	 * @param axis 
+	*/
 	Damper(const int body1, const int body2, const double r,
 		const Eigen::Vector3d& pos1, const Eigen::Vector3d& pos2, const Eigen::Vector3d& axis);
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::VectorXi getBodyIndex() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getExt() const;
 
+	/**
+	 * @brief 
+	 * @param body 
+	 * @param f 
+	*/
 	void updateExternal(const std::vector<std::unique_ptr<RigidBody>>& body, Eigen::VectorXd& f);
 
 private:

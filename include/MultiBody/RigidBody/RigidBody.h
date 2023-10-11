@@ -16,47 +16,132 @@ class RigidBody {
 
 public:
 
+	/**
+	 * @brief 
+	 * @param m 
+	 * @param J 
+	 * @param xG0 
+	 * @param q0 
+	 * @param xGp0 
+	 * @param qp0 
+	*/
 	RigidBody(const Eigen::Matrix3d& m, const Eigen::Matrix3d& J,
 		const Eigen::Vector3d& xG0, const Quaternion& q0,
 		const Eigen::Vector3d& xGp0, const Quaternion& qp0);
 
+	/**
+	 * @brief 
+	 * @param xG 
+	*/
 	void updateXG(const Eigen::Vector3d xG);
 
+	/**
+	 * @brief 
+	 * @param xGp 
+	*/
 	void updateXGp(const Eigen::Vector3d xGp);
 
+	/**
+	 * @brief 
+	 * @param q 
+	*/
 	void updateQ(const Quaternion q);
 
+	/**
+	 * @brief 
+	 * @param qp 
+	*/
 	void updateQp(const Quaternion qp);
 
+	/**
+	 * @brief 
+	 * @param lambda 
+	*/
 	void updateLambda(const double lambda);
 
+	/**
+	 * @brief 
+	*/
 	void updateDof();
 
+	/**
+	 * @brief 
+	*/
 	void updateMass();
 
+	/**
+	 * @brief 
+	*/
 	void updateF();
 
+	/**
+	 * @brief 
+	 * @param dof 
+	 * @param M 
+	 * @param f 
+	 * @param k 
+	*/
 	void updateBody(const Eigen::VectorXd& dof, 
 		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k);
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::MatrixXd getG() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::MatrixXd getGp() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::MatrixXd getE() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::MatrixXd getEp() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::VectorXd getDof() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::MatrixXd getMass() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::VectorXd getF() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::Vector3d getWGlobal() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::Vector3d getWLocal() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Quaternion getQuaternion() const;
 
 private:

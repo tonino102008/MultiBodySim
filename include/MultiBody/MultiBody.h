@@ -23,36 +23,93 @@ class MultiBody {
 
 public:
 
+	/**
+	 * @brief 
+	 * @param timeStart 
+	 * @param timeEnd 
+	 * @param dt 
+	 * @param timeActual 
+	 * @param nBody 
+	 * @param nConstr 
+	 * @param nExt 
+	*/
 	MultiBody(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual,
 		const int nBody, const int nConstr, const int nExt);
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::MatrixXd getdofTimeHistory() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::MatrixXd getMass() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::VectorXd getF() const;
 
+	/**
+	 * @brief 
+	 * @param time 
+	*/
 	void setTime(const TimeSim& time);
 
+	/**
+	 * @brief 
+	 * @param body 
+	 * @param i 
+	*/
 	void setBody(const RigidBody& body, const int i);
 
+	/**
+	 * @brief 
+	 * @tparam T 
+	 * @param constr 
+	 * @param i 
+	*/
 	template <typename T> void setConstr(const T& constr, const int i) {
 		this->constraint_[i] = std::make_unique<T>(constr);
 	};
 
+	/**
+	 * @brief 
+	 * @tparam T 
+	 * @param ext 
+	 * @param i 
+	*/
 	template <typename T> void setExt(const T& ext, const int i) {
 		this->external_[i] = std::make_unique<T>(ext);
 	};
 
+	/**
+	 * @brief 
+	 * @tparam T 
+	 * @param integr 
+	*/
 	template <typename T> void setIntegr(const T& integr) {
 		this->integrator_ = std::make_unique<T>(integr);
 	};
 
+	/**
+	 * @brief 
+	*/
 	void solve();
 
+	/**
+	 * @brief 
+	*/
 	void printToFile() const;
 
+	/**
+	 * @brief 
+	*/
 	friend std::ostream& operator<<(std::ostream& out, const MultiBody& I);
 
 private:

@@ -15,20 +15,56 @@ class Constraint {
 
 public:
 
+	/**
+	 * @brief 
+	 * @param dof1 
+	*/
 	Constraint(const int dof1);
 
+	/**
+	 * @brief 
+	 * @param dof1 
+	 * @param dof2 
+	*/
 	Constraint(const int dof1, const int dof2);
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	int getDof1() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	int getDof2() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getG() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	Eigen::VectorXd getDGDDof() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getB() const;
 
+	/**
+	 * @brief 
+	 * @param dof 
+	 * @param M 
+	 * @param f 
+	 * @param k 
+	*/
 	virtual void updateConstraint(const Eigen::VectorXd& dof,
 		Eigen::MatrixXd& M, Eigen::VectorXd& f, const int k) = 0;
 

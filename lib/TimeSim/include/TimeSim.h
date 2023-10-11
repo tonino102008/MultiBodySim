@@ -16,21 +16,57 @@ class TimeSim {
 
 public:
 
+	/**
+	 * @brief 
+	 * @param timeStart 
+	 * @param timeEnd 
+	 * @param dt 
+	 * @param timeActual 
+	*/
 	TimeSim(const double timeStart, const double timeEnd,
 		const double dt, const double timeActual);
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getTimeStart() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getTimeEnd() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getDt() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	double getTimeActual() const;
 
+	/**
+	 * @brief 
+	 * @return 
+	*/
 	int getNSteps() const;
 
+	/**
+	 * @brief 
+	*/
 	void step();
 
+	/**
+	 * @brief 
+	 * @param out 
+	 * @param t 
+	 * @return 
+	*/
 	friend std::ostream& operator<<(std::ostream& out, const TimeSim& t);
 
 private:
